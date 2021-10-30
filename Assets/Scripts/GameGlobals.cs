@@ -36,7 +36,9 @@ public class GameGlobals : ScriptableObject
 
   public void Awake()
     {
+      Logger.Log ("GameGlobals awake");
+
       registry = Resources.Load ("Registry") as Registry;
-      // registry.Setup ();
+      registry.Setup ();
     }
 }
