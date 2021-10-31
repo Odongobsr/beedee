@@ -6,6 +6,8 @@ public class ObstacleMover : AbstractBlockDependent
 {
   void FixedUpdate()
   {
-    block.desiredVelocity = GameGlobals.Instance.registry.obstacleSpeed;;
+    block.desiredVelocity = 
+      GameGlobals.Instance.registry.obstacleSpeed * 
+      GameGlobals.Instance.registry.globalSpeedMultiplier;
   }
 }

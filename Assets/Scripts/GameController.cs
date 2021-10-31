@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour
 
   IEnumerator StartGameCoroutine ()
   {
+    obstacleManager.Activate ();
+
     int introTime = GameGlobals.Instance.registry.introTime;
 
     Logger.Log ($"Start game in {introTime} seconds");
@@ -28,6 +30,6 @@ public class GameController : MonoBehaviour
 
     Logger.Log ("Start game");
 
-    obstacleManager.Activate ();
+    obstacleManager.StartSpawningObstacles ();
   }
 }

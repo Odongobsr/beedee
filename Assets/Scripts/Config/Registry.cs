@@ -15,6 +15,8 @@ public class Registry : AbstractScriptableObject
   /// How long do we wait before beginning gameplay
   /// </summary>
   public int introTime;
+  [Range (0.5f, 2)]
+  public float globalSpeedMultiplier;
   
   [Header ("Obstacles")]
   [Range (0, 5)]
@@ -48,5 +50,16 @@ public class Registry : AbstractScriptableObject
   public float GetObstacleWaitTime ()
   {
     return obstacleWaitTime;
+  }
+
+  public List<AbstractPoolable> GetObstacleGameObjects ()
+  {
+    List<AbstractPoolable> obstacles = new List<AbstractPoolable> ();
+    for (int i = 0; i < obstacleDataList.Count; i++)
+    {
+      obstacles.Add (obstacleDataList [i].prefab);
+    }
+
+    return obstacles;
   }
 }

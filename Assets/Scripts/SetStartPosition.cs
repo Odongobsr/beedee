@@ -6,7 +6,7 @@ public class SetStartPosition : MonoBehaviour
 {
   public bool topOfScreen;
 
-  void Start ()
+  void OnEnable()
   {
     if (topOfScreen)
     {

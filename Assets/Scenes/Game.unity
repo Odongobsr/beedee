@@ -340,8 +340,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4157f16be985fd4caece2f6b7ed4f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: -0.03333333
+  scrollSpeed: -0.025
   rend: {fileID: 0}
+  offset: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,8 +768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc479607e673a684cbbff60bc0693085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  components: []
-  active: 0
+  pool: {fileID: 0}
   prefab: {fileID: 0}
   xDir: 1
   yDir: 1
@@ -1346,6 +1346,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1356802263}
   - component: {fileID: 1356802262}
+  - component: {fileID: 1356802264}
+  - component: {fileID: 1356802265}
   m_Layer: 0
   m_Name: obstacles
   m_TagString: Untagged
@@ -1367,7 +1369,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   components: []
   active: 0
-  obstacleHolder: {fileID: 1647716202}
+  obstaclePool: {fileID: 1356802264}
+  obstacleSpawner: {fileID: 1356802265}
 --- !u!4 &1356802263
 Transform:
   m_ObjectHideFlags: 0
@@ -1382,6 +1385,37 @@ Transform:
   m_Father: {fileID: 885121382}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1356802264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356802261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c39180b6c0d5d44e8bee69ed6705567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 0
+  holder: {fileID: 1647716202}
+  inactiveObjects: []
+  activeObjects: []
+--- !u!114 &1356802265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356802261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf74acfb6cd52d149b281eb2804bc97b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 0
+  waitTime: 0
+  objectPool: {fileID: 1356802264}
 --- !u!1 &1433556860
 GameObject:
   m_ObjectHideFlags: 0
