@@ -150,7 +150,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.5}
@@ -178,8 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde7d944f922ec941955fb093d4a0297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  components: []
-  active: 0
+  pool: {fileID: 0}
   prefab: {fileID: 11400000, guid: c3e7146e250d1354eabcc108b8a21021, type: 2}
   xDir: 1
   yDir: 1

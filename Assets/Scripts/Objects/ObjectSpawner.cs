@@ -56,6 +56,6 @@ public class ObjectSpawner : AbstractGameComponent
     // activate obstacle
     obj.gameObject.SetActive (true);
 
-    Logger.Log ($"Spawn object {obj.name}", obj);
+    // Logger.Log ($"Spawn object {obj.name}", obj);
   }
 }

@@ -71,7 +71,7 @@ public class ObjectPool : AbstractGameComponent
     {
       activeObjects.Add (obj);
     }
-    Logger.Log ($"Enable object {obj}", obj);
+    // Logger.Log ($"Enable object {obj}", obj);
   }
 
   /// <summary>
@@ -89,6 +89,6 @@ public class ObjectPool : AbstractGameComponent
     {
       inactiveObjects.Add (obj);
     }
-    Logger.Log ($"Disable object {obj}", obj);
+    // Logger.Log ($"Disable object {obj}", obj);
   }
 }
