@@ -9,7 +9,7 @@ public class ObjectPool : AbstractGameComponent
   public List<AbstractPoolable> inactiveObjects; // = new Stack<GameObject> ();  
   public List<AbstractPoolable> activeObjects; // = new Stack<GameObject> ();  
 
-  public void CreateObjects (List<AbstractPoolable> objects, int count)
+  public void CreateObjects (List<DataObject> objects, int count)
   {
     if (null == holder)
     {
@@ -27,28 +27,43 @@ public class ObjectPool : AbstractGameComponent
           continue;
         }
 
+        // deactivate prefab?
+        // objects [i].prefab.gameObject.SetActive (false);
+
         AbstractPoolable obj = Instantiate (
-          original: objects [i],
+          original: objects [i].prefab,
           position: Vector3.zero,
           rotation: Quaternion.identity,
-          parent:holder 
+          parent:holder
         );
+      
+        // allow for prefabs to switch data types
+        obj.data = objects [i];
 
-        obj.name = $"{objects [i].name}_{j}";
+        string name = objects [i].name;
+
+        obj.name = $"{name}_{j}";
         obj.pool = this;
 
         obj.gameObject.SetActive (false);
-
+        // Logger.Log ($"Create object {name}", obj);
         // OnDisableObject (obj);
       }
     }
   }
 
-  public AbstractPoolable GetInactiveObject ()
+  public AbstractPoolable GetInactiveObject (bool random = false)
   {
     if (inactiveObjects.Count > 0)
     {
-      return inactiveObjects [0];
+      if (random)
+      {
+        return inactiveObjects [Random.Range (0, inactiveObjects.Count)];
+      }
+      else
+      {
+        return inactiveObjects [0];
+      }
     }
     else
     {

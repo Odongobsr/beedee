@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fd9673b8a7eebc43a0f58175063b2fb, type: 3}
-  m_Name: Obstacle 2
+  m_Name: Obstacle pipe 2 - left
   m_EditorClassIdentifier: 
   me: {fileID: 11400000}
   prefab: {fileID: 6623537243999037532, guid: 250b68679ae976c4dba3356d5d860282, type: 3}
+  orientation: -1
+  rotateToOrientation: 1

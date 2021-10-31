@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 6086434949092271252}
   - component: {fileID: 8040010680818533731}
   - component: {fileID: 613149250431103077}
+  - component: {fileID: 3843038482000461075}
   m_Layer: 0
   m_Name: obstacle
   m_TagString: Obstacle
@@ -179,7 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pool: {fileID: 0}
-  prefab: {fileID: 11400000, guid: c3e7146e250d1354eabcc108b8a21021, type: 2}
+  data: {fileID: 0}
   xDir: 1
   yDir: 1
   limitToScreenX: 0
@@ -225,3 +226,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   topOfScreen: 1
+--- !u!114 &3843038482000461075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8648330543369230618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c5ebae94209fbc44b2b971ad453d6f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  block: {fileID: 7981580691242365673}

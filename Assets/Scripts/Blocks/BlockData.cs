@@ -6,7 +6,12 @@ using UnityEngine;
   fileName ="BlockData",
   menuName = "Block Data"
 )]
-public class BlockData : AbstractScriptableObject
+public class BlockData : DataObject
 {
-  public Block prefab;
+  // public Block block;
+  public Orientation orientation;
+  /// <summary>
+  /// Should this block be rotated based on its orientation?
+  /// </summary>
+  public bool rotateToOrientation;
 }

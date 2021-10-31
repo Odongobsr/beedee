@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class AbstractPoolable : MonoBehaviour
 {
+  public DataObject data;
+  
   /// <summary>
   /// What pool does this object belong to?
   /// </summary>

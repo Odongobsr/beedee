@@ -9,7 +9,7 @@ public class ObjectSpawner : AbstractGameComponent
   /// <summary>
   /// How long to wait before spawning another object?
   /// </summary>
-  public float waitTime;
+  public FloatVariable waitTime;
 
 
   [Header ("References")]
@@ -20,7 +20,7 @@ public class ObjectSpawner : AbstractGameComponent
     Assert.IsNotNull (objectPool);
   }
 
-  public void StartSpawningObjects (float wait)
+  public void StartSpawningObjects (FloatVariable wait)
   {
     waitTime = wait;
     StartCoroutine (SpawnObjectCoroutine ());
@@ -33,7 +33,7 @@ public class ObjectSpawner : AbstractGameComponent
     while (true)
     {
       SpawnObject ();
-      yield return new WaitForSeconds (waitTime);
+      yield return new WaitForSeconds (waitTime.value);
     }
   }
 
@@ -45,7 +45,7 @@ public class ObjectSpawner : AbstractGameComponent
       return;
     }
 
-    AbstractPoolable obj = objectPool.GetInactiveObject ();
+    AbstractPoolable obj = objectPool.GetInactiveObject (random: true);
 
     if (null == obj)
     {

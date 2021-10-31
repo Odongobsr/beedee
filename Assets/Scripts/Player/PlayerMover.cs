@@ -11,11 +11,11 @@ public class PlayerMover : MonoBehaviour
   {
       if (player.inputHandler.moveLeft)
       {
-        player.desiredVelocity = new Vector2(-speed, 0);
+        player.desiredVelocity = new Vector2(-GameGlobals.Instance.registry.playerMoveSpeed, 0);
       }
       else if (player.inputHandler.moveRight)
       {
-        player.desiredVelocity = new Vector2(speed, 0);
+        player.desiredVelocity = new Vector2(GameGlobals.Instance.registry.playerMoveSpeed, 0);
       }
       else
       {

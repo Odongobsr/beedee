@@ -25,13 +25,13 @@ public class ObstacleManager : AbstractGameObject
 
     // create obstacle object pool
     obstaclePool.CreateObjects (
-      objects: GameGlobals.Instance.registry.GetObstacleGameObjects (),
+      objects: GameGlobals.Instance.registry.GetObstacleDataObjects (),
       count: GameGlobals.Instance.registry.obstaclePoolSize
     );
   }
 
   public void StartSpawningObstacles ()
   {
-    obstacleSpawner.StartSpawningObjects (wait: GameGlobals.Instance.registry.GetObstacleWaitTime ());
+    obstacleSpawner.StartSpawningObjects (wait: GameGlobals.Instance.registry.obstacleWaitTime);
   }
 }

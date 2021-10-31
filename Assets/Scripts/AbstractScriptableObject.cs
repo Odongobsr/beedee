@@ -6,7 +6,7 @@ public abstract class AbstractScriptableObject : ScriptableObject
 {
   public AbstractScriptableObject me;
 
-  void OnValidate()
+  public virtual void OnValidate()
   {
     if (null == me)
     {

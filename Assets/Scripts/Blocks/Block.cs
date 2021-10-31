@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Block : AbstractPoolable
 {
-  public BlockData prefab;
-
   [Header ("Configuration")]
   public int xDir = 1;
   public int yDir = 1;

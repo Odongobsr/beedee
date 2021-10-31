@@ -31,6 +31,10 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7981580691242365673, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7981580691242365673, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
       propertyPath: prefab
       value: 
       objectReference: {fileID: 11400000, guid: 756852a68095afe43b18b1f5301bb352, type: 2}
@@ -60,11 +64,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8648330543369230617, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.94
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8648330543369230617, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.41
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8648330543369230617, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -100,7 +104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8648330543369230618, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
       propertyPath: m_Name
-      value: obstacle (3) Variant
+      value: obstacle wall
       objectReference: {fileID: 0}
     - target: {fileID: 8648330543369230619, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
       propertyPath: m_Size.x

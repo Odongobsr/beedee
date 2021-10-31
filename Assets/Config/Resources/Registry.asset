@@ -14,11 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   me: {fileID: 11400000}
   introTime: 1
-  globalSpeedMultiplier: 1
-  obstacleWaitTime: 3
+  globalSpeedMultiplier: 1.771
+  playerMoveSpeed: 3.5
+  useTouchInput: 0
+  obstacleWaitTime: {fileID: 11400000, guid: 037aa910cf83e4447a3ef81d93a5ff14, type: 2}
   obstacleSpeed: {x: 0, y: -1}
   obstaclePoolSize: 5
+  doubleObstacleGapMin: 1
+  doubleObstacleGapMax: 1
+  doubleObstacleXOffset: 1
   obstacleDataList:
+  - {fileID: 11400000, guid: 6ae75436b502ac448a806c8ceab537e5, type: 2}
   - {fileID: 11400000, guid: c3e7146e250d1354eabcc108b8a21021, type: 2}
   blocks: []
   levels: []

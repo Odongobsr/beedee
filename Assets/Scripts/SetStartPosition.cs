@@ -10,7 +10,7 @@ public class SetStartPosition : MonoBehaviour
   {
     if (topOfScreen)
     {
-      Vector3 pos = Camera.main.ViewportToWorldPoint (new Vector2 (0.5f, 1));
+      Vector3 pos = Camera.main.ViewportToWorldPoint (new Vector2 (0.5f, 1.25f));
       // dont start at camera's z position
       pos.z = 0;
 
