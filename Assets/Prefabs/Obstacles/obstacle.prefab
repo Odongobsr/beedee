@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8648330541988801502}
   - component: {fileID: 8648330541988801503}
   m_Layer: 0
-  m_Name: Square
+  m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8bacc7d4bbd8e01478a0d79ab8ba2e6a, type: 3}
   m_Color: {r: 0.24736814, g: 0.38665283, b: 0.7169812, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 7981580691242365673}
   - component: {fileID: 6086434949092271252}
   - component: {fileID: 8040010680818533731}
+  - component: {fileID: 613149250431103077}
   m_Layer: 0
   m_Name: obstacle
   m_TagString: Obstacle
@@ -111,8 +112,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8648330543369230618}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.97, y: 1.9, z: 0}
-  m_LocalScale: {x: 4, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8648330541988801502}
   m_Father: {fileID: 0}
@@ -152,7 +153,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -177,12 +178,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde7d944f922ec941955fb093d4a0297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  components: []
+  active: 0
+  prefab: {fileID: 11400000, guid: c3e7146e250d1354eabcc108b8a21021, type: 2}
   xDir: 1
   yDir: 1
-  prefab: {fileID: 11400000, guid: c3e7146e250d1354eabcc108b8a21021, type: 2}
   limitToScreenX: 0
-  body: {fileID: 8648330543369230616}
   desiredVelocity: {x: 0, y: 0}
+  body: {fileID: 8648330543369230616}
+  dependents: []
 --- !u!114 &6086434949092271252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d43a2b0fb8b8fe14fb49e4f4942116dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: {x: 0, y: 1}
+  active: 0
   block: {fileID: 7981580691242365673}
 --- !u!114 &8040010680818533731
 MonoBehaviour:
@@ -209,3 +213,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c3e9e1608e2284298b38a90dcf7ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &613149250431103077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8648330543369230618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d43695bab1b7f6a4f8ab09db635e2222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topOfScreen: 1

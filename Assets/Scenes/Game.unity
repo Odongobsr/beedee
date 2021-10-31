@@ -768,6 +768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   components: []
+  active: 0
   prefab: {fileID: 0}
   xDir: 1
   yDir: 1
@@ -1065,6 +1066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b356ec3bada0b524e840b61954dafcba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obstacleManager: {fileID: 1356802262}
 --- !u!1001 &984029265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1363,8 +1365,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13c7e19ecef432f4aa41f20b6c0fde46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockDatas: []
-  obstacles: []
+  components: []
+  active: 0
+  obstacleHolder: {fileID: 1647716202}
 --- !u!4 &1356802263
 Transform:
   m_ObjectHideFlags: 0

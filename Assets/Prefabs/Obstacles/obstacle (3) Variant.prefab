@@ -30,6 +30,26 @@ PrefabInstance:
       propertyPath: speed.y
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 7981580691242365673, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 11400000, guid: 756852a68095afe43b18b1f5301bb352, type: 2}
+    - target: {fileID: 8648330541988801503, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e56c7b7f767519b4cace876ccc2a8092, type: 3}
+    - target: {fileID: 8648330541988801503, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648330541988801503, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648330541988801503, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8648330543369230617, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -80,7 +100,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8648330543369230618, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
       propertyPath: m_Name
-      value: obstacle (3)
+      value: obstacle (3) Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648330543369230619, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
+      propertyPath: m_Size.x
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}

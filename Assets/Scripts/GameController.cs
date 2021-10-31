@@ -1,18 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class GameController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  [Header ("References")]
+  public ObstacleManager obstacleManager;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  void Awake()
+  {
+    Assert.IsNotNull (obstacleManager);    
+  }
+
+  void Start ()
+  {
+    StartCoroutine (StartGameCoroutine ());
+  }
+
+  IEnumerator StartGameCoroutine ()
+  {
+    int introTime = GameGlobals.Instance.registry.introTime;
+
+    Logger.Log ($"Start game in {introTime} seconds");
+
+    yield return new WaitForSeconds (introTime);
+
+    Logger.Log ("Start game");
+
+    obstacleManager.Activate ();
+  }
 }

@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd9673b8a7eebc43a0f58175063b2fb, type: 3}
   m_Name: Obstacle 3
   m_EditorClassIdentifier: 
-  block: {fileID: 7981580691242365673, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
+  me: {fileID: 11400000}
+  prefab: {fileID: 7934810861824507664, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}

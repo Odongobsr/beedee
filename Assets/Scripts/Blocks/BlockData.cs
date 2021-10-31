@@ -6,7 +6,7 @@ using UnityEngine;
   fileName ="BlockData",
   menuName = "Block Data"
 )]
-public class BlockData : ScriptableObject
+public class BlockData : AbstractScriptableObject
 {
-  public Block block;
+  public Block prefab;
 }
