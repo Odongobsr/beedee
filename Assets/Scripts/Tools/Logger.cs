@@ -23,6 +23,11 @@ public static class Logger
     Debug.LogAssertion (message + GetTime (), context);
   }
 
+  public static void LogDivider ()
+  {
+    Debug.Log ("----");
+  }
+
 
   public static string GetTime ()
   {

@@ -15,7 +15,14 @@ public class GameController : MonoBehaviour
 
   void Start ()
   {
+    GameGlobals.Instance.gameController = this;
     StartCoroutine (StartGameCoroutine ());
+  }
+
+  void OnEnable ()
+  {
+    Logger.LogDivider ();
+    Logger.Log ("Enable game controller");
   }
 
   IEnumerator StartGameCoroutine ()

@@ -10,6 +10,7 @@ using System.Text;
 public class GameGlobals : ScriptableObject
 {
   public Registry registry;
+  public GameController gameController;
 
   private static GameGlobals _instance;
   public static GameGlobals Instance

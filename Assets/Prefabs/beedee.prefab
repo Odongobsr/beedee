@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4769116378811058884}
   - component: {fileID: 4769116378811058891}
   - component: {fileID: 4769116378811058890}
+  - component: {fileID: 5918874309953520936}
   - component: {fileID: 4769116378811058889}
   - component: {fileID: 1659207685763609058}
   m_Layer: 0
@@ -56,6 +57,7 @@ MonoBehaviour:
   desiredVelocity: {x: 0, y: 0}
   body: {fileID: 4769116378811058889}
   dependents: []
+  alive: 0
   inputHandler: {fileID: 4769116378811058891}
 --- !u!114 &4769116378811058891
 MonoBehaviour:
@@ -84,6 +86,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  player: {fileID: 4769116378811058884}
+--- !u!114 &5918874309953520936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4769116378811058895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12e435e8e1637ec42a7031594c4b5462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   player: {fileID: 4769116378811058884}
 --- !u!50 &4769116378811058889
 Rigidbody2D:

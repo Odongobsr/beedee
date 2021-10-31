@@ -15,4 +15,10 @@ public class MainMenuController : MonoBehaviour
   {
     Assert.IsNotNull (switchToGameController);
   }
+
+  void OnEnable ()
+  {
+    Logger.LogDivider ();
+    Logger.Log ("Enable main menu controller");
+  }
 }

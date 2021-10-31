@@ -8,16 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class SwitchScene : MonoBehaviour
 {
-    public void Switch ()
-    {
-      SwitchSceneParams parameters = GetComponent<SwitchSceneParams> ();
-
-      if (null != parameters)
-      {
-        LoadYourAsyncScene (parameters.sceneToLoad.ToString ());
-      }
-    }
-
     IEnumerator LoadYourAsyncScene(string next)
     {
         Logger.Log ($"Try load {next} scene");

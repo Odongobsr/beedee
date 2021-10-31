@@ -31,6 +31,9 @@ public class Registry : AbstractScriptableObject
   public List<BlockData> blocks = new List<BlockData> ();
   public List<Level> levels = new List<Level> ();
 
+  [Header ("Tags")]
+  public string obstacleTag;
+  
   void Awake ()
   {
   }
