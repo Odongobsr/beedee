@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,12 @@ public class ObjectSpawner : AbstractGameComponent
 
   [Header ("References")]
   public ObjectPool objectPool;
+
+  public delegate void OnSpawnObject();
+  public OnSpawnObject onSpawnObject;
+
+  [Header ("Runtime Only")]
+  public List<AbstractPoolable> objects;
 
   void Awake ()
   {
@@ -33,16 +40,22 @@ public class ObjectSpawner : AbstractGameComponent
     while (true)
     {
       SpawnObject ();
+
       yield return new WaitForSeconds (waitTime.value);
     }
   }
 
-  void SpawnObject ()
+  public AbstractPoolable SpawnObject (Transform parent = null)
   {
+    if (GameGlobals.Instance.registry.paused)
+    {
+      return null;
+    }
+    
     if (objectPool.inactiveObjects.Count == 0)
     {
       Logger.LogWarning ($"No inactive objects in pool {objectPool} !", this);
-      return;
+      return null;
     }
 
     AbstractPoolable obj = objectPool.GetInactiveObject (random: true);
@@ -50,12 +63,21 @@ public class ObjectSpawner : AbstractGameComponent
     if (null == obj)
     {
       Logger.LogWarning ("Object is null!", this);
-      return;
+      return null;
     }
     
     // activate obstacle
+    if (null != parent)
+    {
+      // obj.transform.parent = parent;
+      obj.transform.position = parent.position;
+    }
     obj.gameObject.SetActive (true);
+    onSpawnObject?.Invoke ();
+
+    objects.Add (obj);
 
     // Logger.Log ($"Spawn object {obj.name}", obj);
+    return obj;
   }
 }

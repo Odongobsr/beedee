@@ -5,17 +5,21 @@ using UnityEngine.Assertions;
 
 public class GameController : MonoBehaviour
 {
+  public bool gameStarted;
+
   [Header ("References")]
   public ObstacleManager obstacleManager;
+  public FlowerManager flowerManager;
 
   void Awake()
   {
     Assert.IsNotNull (obstacleManager);    
+    Assert.IsNotNull (flowerManager);    
+    GameGlobals.Instance.gameController = this;
   }
 
-  void Start ()
+  public void Start ()
   {
-    GameGlobals.Instance.gameController = this;
     StartCoroutine (StartGameCoroutine ());
   }
 
@@ -27,6 +31,9 @@ public class GameController : MonoBehaviour
 
   IEnumerator StartGameCoroutine ()
   {
+    GameGlobals.Instance.registry.UnPause ();
+    gameStarted = true;
+    flowerManager.Activate ();
     obstacleManager.Activate ();
 
     int introTime = GameGlobals.Instance.registry.introTime;

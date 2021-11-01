@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8083996634952558338
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8709772458053653728, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709772458053653728, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709772458053653728, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709772458053653728, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709772458053653728, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709772458053653728, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709772458053653728, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709772458053653728, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709772458053653728, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709772458053653728, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709772458053653728, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709772458053653731, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}
+      propertyPath: m_Name
+      value: obstacle wall - static
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6101539114455214445, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}
+    - {fileID: 8019083772465170586, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}
+    - {fileID: 601246867628883356, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}
+    - {fileID: 3859424398475849962, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}
+    - {fileID: 3526683353671364679, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}
+    - {fileID: 1667640227, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}
+    - {fileID: 7934810861824507664, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}
+    - {fileID: 1325794101626378189, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}

@@ -6,14 +6,25 @@ using UnityEngine.Assertions;
 public class PlayerCollisionDetector : MonoBehaviour
 {
   public Player player;
+  public AudioSource flowerSound;
+  public AudioSource obstacleSound;
 
   void Awake ()
   {
     Assert.IsNotNull (player);
+    Assert.IsNotNull (flowerSound);
+    Assert.IsNotNull (obstacleSound);
   }
 
   void OnTriggerEnter2D(Collider2D other)
   {
+#if UNITY_EDITOR
+    if (GameGlobals.Instance.registry.debugMode)
+    {
+      return;
+    }
+#endif
+
     if (player.alive)
     {
       // has player hit obstacle?
@@ -21,9 +32,17 @@ public class PlayerCollisionDetector : MonoBehaviour
       {
         // disable other collider2d
         other.enabled = false;
-        Logger.Log ($"Player has hit {other.attachedRigidbody.tag} - {other.attachedRigidbody.name}", other.attachedRigidbody);
         player.Die ();
+        obstacleSound.Play ();
       }
+
+      else if (other.CompareTag (GameGlobals.Instance.registry.flowerTag))
+      {
+        other.enabled = false;
+        GameGlobals.Instance.registry.Pause ();
+        flowerSound.Play ();
+      }
+      Logger.Log ($"Player has hit {other.attachedRigidbody.tag} - {other.attachedRigidbody.name}", other.attachedRigidbody);
     }
   }
 }

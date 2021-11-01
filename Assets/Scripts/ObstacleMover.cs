@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstacleMover : AbstractBlockDependent
+public class ObstacleMover : AbstractVelocityModifier
 {
-  void FixedUpdate()
+  public override Vector2 ModifyVelocity (Block block)
   {
-    block.desiredVelocity = 
-      GameGlobals.Instance.registry.obstacleSpeed * 
-      GameGlobals.Instance.registry.globalSpeedMultiplier;
+    Vector2 desiredVelocity = new Vector2 ();
+
+    desiredVelocity += 
+      (Vector2) GameGlobals.Instance.registry.obstacleSpeed;
+
+    return desiredVelocity;
   }
 }

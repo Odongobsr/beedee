@@ -2,24 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMover : MonoBehaviour
+public class PlayerMover : AbstractVelocityModifier
 {
   public float speed;
   public Player player;
 
-  void Update()
+  public override Vector2 ModifyVelocity (Block block)
   {
+    Vector2 desiredVelocity = new Vector2 ();
+
+    if (player.alive)
+    {
       if (player.inputHandler.moveLeft)
       {
-        player.desiredVelocity = new Vector2(-GameGlobals.Instance.registry.playerMoveSpeed, 0);
+        desiredVelocity = new Vector2(-GameGlobals.Instance.registry.playerMoveSpeed, 0);
       }
       else if (player.inputHandler.moveRight)
       {
-        player.desiredVelocity = new Vector2(GameGlobals.Instance.registry.playerMoveSpeed, 0);
+        desiredVelocity = new Vector2(GameGlobals.Instance.registry.playerMoveSpeed, 0);
       }
-      else
-      {
-        player.desiredVelocity = new Vector2();
-      }
+    }
+
+    return desiredVelocity;
   }
 }

@@ -2,39 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockMover_Horizontal : MonoBehaviour
+public class BlockMover_Horizontal : AbstractVelocityModifier
 {
   public float speed;
   public bool bounce;
-  public Block block;
 
-  void Start()
+  public override Vector2 ModifyVelocity(Block block)
   {
-    block.xDir = 1;     
-  }
-
-  void FixedUpdate()
-  {
-    block.desiredVelocity.x += speed * block.xDir;
+    Vector2 desiredVelocity = new Vector2 ();
+    desiredVelocity.x = speed * block.xDir;
 
     if (bounce)
     {
       Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
 
-      if (block.desiredVelocity.x > 0)
+      if (block.xDir > 0)
       {
         if (pos.x > 1.0)
         {
-         block.desiredVelocity.x *= -1; 
+         block.desiredVelocity.x *= -1;
+         desiredVelocity.x *= -1;
         }
       }
-      else
+      else if (block.xDir < 0)
       {
-        if (pos.x < 1.0)
+        if (pos.x < 0)
         {
-          block.desiredVelocity *= -1;
+          block.desiredVelocity.x *= -1;
+          desiredVelocity.x *= -1;
         }
       }
     }
+
+    return desiredVelocity;
   }
 }

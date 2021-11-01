@@ -7,6 +7,7 @@ public class SwitchToGameController : MonoBehaviour
 {
   [Header ("References")]
   public GameObject switcher;
+  public AudioSource audioSource;
   
   [Header ("Runtime only")]
   public bool switchingToGameScene;
@@ -14,6 +15,8 @@ public class SwitchToGameController : MonoBehaviour
   void Awake()
   {
     Assert.IsNotNull (switcher);    
+    Assert.IsNotNull (audioSource);    
+    Assert.IsNotNull (audioSource.clip);    
   }
 
   void Start()
@@ -39,5 +42,6 @@ public class SwitchToGameController : MonoBehaviour
     switchingToGameScene = true;
 
     switcher.gameObject.SetActive (true);
+    audioSource.Play ();
   }
 }

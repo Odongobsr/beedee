@@ -13,12 +13,16 @@ MonoBehaviour:
   m_Name: Registry
   m_EditorClassIdentifier: 
   me: {fileID: 11400000}
+  paused: 0
+  debugMode: 0
   introTime: 1
-  globalSpeedMultiplier: 1.771
+  globalSpeedMultiplier: 1.9
   playerMoveSpeed: 3.5
-  useTouchInput: 0
+  deathTimeout: 1.5
+  useTouchInput: 1
   obstacleWaitTime: {fileID: 11400000, guid: 037aa910cf83e4447a3ef81d93a5ff14, type: 2}
-  obstacleSpeed: {x: 0, y: -1}
+  flowerWaitTime: {fileID: 11400000, guid: df3f40fa0ddb3b74c86d7365ce9dd1d0, type: 2}
+  obstacleSpeed: {x: 0, y: -2}
   obstaclePoolSize: 5
   doubleObstacleGapMin: 1
   doubleObstacleGapMax: 1
@@ -26,6 +30,14 @@ MonoBehaviour:
   obstacleDataList:
   - {fileID: 11400000, guid: 6ae75436b502ac448a806c8ceab537e5, type: 2}
   - {fileID: 11400000, guid: c3e7146e250d1354eabcc108b8a21021, type: 2}
+  - {fileID: 11400000, guid: cf3274697f89f1f4bae9d3df0f9907b2, type: 2}
+  - {fileID: 11400000, guid: 756852a68095afe43b18b1f5301bb352, type: 2}
+  - {fileID: 11400000, guid: b3c62942091c03340938ff3736a0932c, type: 2}
+  flowerInterval: 10
+  flowerPoolSize: 5
+  flowerDataList:
+  - {fileID: 11400000, guid: 3f00c54275455f34c89e1d39c1d0e67d, type: 2}
   blocks: []
   levels: []
   obstacleTag: Obstacle
+  flowerTag: Flower

@@ -11,6 +11,8 @@ using UnityEngine.Assertions;
 public class Registry : AbstractScriptableObject
 {
   [Header ("Gameplay")]
+  public bool paused;
+  public bool debugMode;
   /// <summary>
   /// How long do we wait before beginning gameplay
   /// </summary>
@@ -19,12 +21,16 @@ public class Registry : AbstractScriptableObject
   public float globalSpeedMultiplier;
   [Range (1, 5)]
   public float playerMoveSpeed = 3;
+  [Range (1, 5)]
+  public float deathTimeout = 1;
+
 
   [Header ("Input")]
   public bool useTouchInput;
 
   [Header ("Variables")]
   public FloatVariable obstacleWaitTime;
+  public FloatVariable flowerWaitTime;
   
   [Header ("Obstacles")]
   public Vector2 obstacleSpeed;
@@ -37,6 +43,12 @@ public class Registry : AbstractScriptableObject
   [Range (0, 5)]
   public float doubleObstacleXOffset;
   public List<BlockData> obstacleDataList = new List<BlockData> ();
+  [Header ("Flowers")]
+  [Range (1, 40)]
+  public int flowerInterval;  
+  [Range (1, 20)]
+  public int flowerPoolSize;  
+  public List<BlockData> flowerDataList = new List<BlockData> ();
 
   [Header ("References")]
   public List<BlockData> blocks = new List<BlockData> ();
@@ -45,6 +57,7 @@ public class Registry : AbstractScriptableObject
 
   [Header ("Tags")]
   public string obstacleTag;
+  public string flowerTag;
   
   void Awake ()
   {
@@ -64,6 +77,18 @@ public class Registry : AbstractScriptableObject
     Logger.Log ("Setup registry");
   }
 
+  public float GetGlobalSpeed ()
+  {
+    if (paused)
+    {
+      return 0;
+    }
+    else
+    {
+      return globalSpeedMultiplier;
+    }
+  }
+
   public List<DataObject> GetObstacleDataObjects ()
   {
     List<DataObject> obstacles = new List<DataObject> ();
@@ -77,6 +102,19 @@ public class Registry : AbstractScriptableObject
     return obstacles;
   }
 
+  public List<DataObject> GetFlowerDataObjects ()
+  {
+    List<DataObject> flowers = new List<DataObject> ();
+    for (int i = 0; i < flowerDataList.Count; i++)
+    {
+      DataObject obj = flowerDataList [i];
+      // obj.name = obstacleDataList [i].name;
+      flowers.Add (obj);
+    }
+
+    return flowers;
+  }
+
   public override void OnValidate()
   {
     base.OnValidate();
@@ -85,5 +123,14 @@ public class Registry : AbstractScriptableObject
     {
       doubleObstacleGapMax = doubleObstacleGapMin;
     }
+  }
+
+  public void Pause ()
+  {
+    paused = true;
+  }
+  public void UnPause ()
+  {
+    paused = false;
   }
 }

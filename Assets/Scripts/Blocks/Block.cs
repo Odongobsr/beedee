@@ -12,30 +12,60 @@ public class Block : AbstractPoolable
 
   [Header ("References")]
   public Rigidbody2D body;
+  public Transform scripts;
 
   [Header ("Runtime only")]
+  public List<AbstractVelocityModifier> velocityModifiers;
   public List<AbstractBlockDependent> dependents = new List<AbstractBlockDependent> ();
+
+  public virtual void Start()
+  {
+    if (null != scripts)
+    {
+      velocityModifiers = 
+        new List<AbstractVelocityModifier> (scripts.GetComponentsInChildren<AbstractVelocityModifier> ());
+    }
+  }
 
   public void FixedUpdate()
   {
-      if (limitToScreenX)
+    if (GameGlobals.Instance.registry.paused)
+    {
+      body.velocity = Vector2.zero;
+      return;
+    }
+
+    desiredVelocity = Vector2.zero;
+
+    for (int i = 0; i < velocityModifiers.Count; i++)
+    {
+      desiredVelocity += velocityModifiers [i].ModifyVelocity (this);
+    }
+
+    if (limitToScreenX)
+    {
+      Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
+      
+      if (desiredVelocity.x < 0)
       {
-        Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
-        
-        if (desiredVelocity.x < 0)
-        {
-          if(pos.x < 0.0) desiredVelocity.x = 0;
-        }
-        else
-        if (desiredVelocity.x > 0)
-        {
-          if(pos.x > 1.0) desiredVelocity.x = 0;
-        }
-        // if(pos.y < 0.0) Logger.Log("I am below the camera's view.");
-        // if(1.0 < pos.y) Logger.Log("I am above the camera's view.");
+        if(pos.x < 0.0) desiredVelocity.x = 0;
       }
-      body.velocity = desiredVelocity; //* Time.deltaTime;
-      xDir = (int) Mathf.Sign (body.velocity.x);
-      yDir = (int) Mathf.Sign (body.velocity.y);
+      else
+      if (desiredVelocity.x > 0)
+      {
+        if(pos.x > 1.0) desiredVelocity.x = 0;
+      }
+      // if(pos.y < 0.0) Logger.Log("I am below the camera's view.");
+      // if(1.0 < pos.y) Logger.Log("I am above the camera's view.");
+    }
+    
+    body.velocity = desiredVelocity; //* Time.deltaTime;
+    xDir = (int) Mathf.Sign (body.velocity.x);
+    yDir = (int) Mathf.Sign (body.velocity.y);
+  }
+
+  public void LateUpdate()
+  {
+    desiredVelocity = Vector2.zero;
   }
 }

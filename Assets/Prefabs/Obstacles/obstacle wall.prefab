@@ -1,20 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &1667640227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8709772458053653731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07e7c7be527f7844284d5c2b64b763ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  bounce: 1
-  block: {fileID: 7934810861824507664}
 --- !u!1001 &61459579924106745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41,18 +26,18 @@ PrefabInstance:
     - target: {fileID: 8648330541988801503, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: e56c7b7f767519b4cace876ccc2a8092, type: 3}
+      objectReference: {fileID: 21300000, guid: 80164de0107e5a248a0bc9524c400eab, type: 3}
     - target: {fileID: 8648330541988801503, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.7169812
       objectReference: {fileID: 0}
     - target: {fileID: 8648330541988801503, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.38665283
       objectReference: {fileID: 0}
     - target: {fileID: 8648330541988801503, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.24736814
       objectReference: {fileID: 0}
     - target: {fileID: 8648330543369230617, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
       propertyPath: m_RootOrder
@@ -112,19 +97,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
---- !u!1 &8709772458053653731 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8648330543369230618, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
-  m_PrefabInstance: {fileID: 61459579924106745}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7934810861824507664 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7981580691242365673, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
-  m_PrefabInstance: {fileID: 61459579924106745}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8709772458053653731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fde7d944f922ec941955fb093d4a0297, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

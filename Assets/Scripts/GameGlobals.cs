@@ -9,6 +9,7 @@ using System.Text;
 
 public class GameGlobals : ScriptableObject
 {
+  public Player player;
   public Registry registry;
   public GameController gameController;
 

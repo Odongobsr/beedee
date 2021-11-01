@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Obstacle
   m_EditorClassIdentifier: 
   me: {fileID: 11400000}
-  prefab: {fileID: 7981580691242365673, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
+  prefab: {fileID: 7414121315366315500, guid: 7662b1ff291af6e48b3ff663ce262c3d, type: 3}
   orientation: 0
   rotateToOrientation: 0
