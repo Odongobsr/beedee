@@ -2,38 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockMover_Horizontal : AbstractVelocityModifier
+namespace Bee
 {
-  public float speed;
-  public bool bounce;
-
-  public override Vector2 ModifyVelocity(Block block)
+  public class BlockMover_Horizontal : AbstractVelocityModifier
   {
-    Vector2 desiredVelocity = new Vector2 ();
-    desiredVelocity.x = speed * block.xDir;
+    public float speed;
+    public bool bounce;
 
-    if (bounce)
+    public override Vector2 ModifyVelocity(Block block)
     {
-      Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
+      Vector2 desiredVelocity = new Vector2 ();
+      desiredVelocity.x = speed * block.xDir;
 
-      if (block.xDir > 0)
+      if (bounce)
       {
-        if (pos.x > 1.0)
+        Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
+
+        if (block.xDir > 0)
         {
-         block.desiredVelocity.x *= -1;
-         desiredVelocity.x *= -1;
-        }
-      }
-      else if (block.xDir < 0)
-      {
-        if (pos.x < 0)
-        {
+          if (pos.x > 1.0)
+          {
           block.desiredVelocity.x *= -1;
           desiredVelocity.x *= -1;
+          }
+        }
+        else if (block.xDir < 0)
+        {
+          if (pos.x < 0)
+          {
+            block.desiredVelocity.x *= -1;
+            desiredVelocity.x *= -1;
+          }
         }
       }
-    }
 
-    return desiredVelocity;
+      return desiredVelocity;
+    }
   }
 }

@@ -3,46 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class PlayerCollisionDetector : MonoBehaviour
+namespace Bee
 {
-  public Player player;
-  public AudioSource flowerSound;
-  public AudioSource obstacleSound;
-
-  void Awake ()
+  public class PlayerCollisionDetector : MonoBehaviour
   {
-    Assert.IsNotNull (player);
-    Assert.IsNotNull (flowerSound);
-    Assert.IsNotNull (obstacleSound);
-  }
+    public Player player;
+    public AudioSource flowerSound;
+    public AudioSource obstacleSound;
 
-  void OnTriggerEnter2D(Collider2D other)
-  {
-#if UNITY_EDITOR
-    if (GameGlobals.Instance.registry.debugMode)
+    void Awake ()
     {
-      return;
+      Assert.IsNotNull (player);
+      Assert.IsNotNull (flowerSound);
+      Assert.IsNotNull (obstacleSound);
     }
-#endif
 
-    if (player.alive)
+    void OnTriggerEnter2D(Collider2D other)
     {
-      // has player hit obstacle?
-      if (other.CompareTag (GameGlobals.Instance.registry.obstacleTag))
+  #if UNITY_EDITOR
+      if (GameGlobals.Instance.registry.debugMode)
       {
-        // disable other collider2d
-        other.enabled = false;
-        player.Die ();
-        obstacleSound.Play ();
+        return;
       }
+  #endif
 
-      else if (other.CompareTag (GameGlobals.Instance.registry.flowerTag))
+      if (player.alive)
       {
-        other.enabled = false;
-        GameGlobals.Instance.registry.Pause ();
-        flowerSound.Play ();
+        // has player hit obstacle?
+        if (other.CompareTag (GameGlobals.Instance.registry.obstacleTag))
+        {
+          // disable other collider2d
+          other.enabled = false;
+          player.Die ();
+          obstacleSound.Play ();
+        }
+
+        else if (other.CompareTag (GameGlobals.Instance.registry.flowerTag))
+        {
+          other.enabled = false;
+          GameGlobals.Instance.registry.Pause ();
+          flowerSound.Play ();
+        }
+        Logger.Log ($"Player has hit {other.attachedRigidbody.tag} - {other.attachedRigidbody.name}", other.attachedRigidbody);
       }
-      Logger.Log ($"Player has hit {other.attachedRigidbody.tag} - {other.attachedRigidbody.name}", other.attachedRigidbody);
     }
   }
 }

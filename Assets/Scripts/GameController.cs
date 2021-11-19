@@ -3,47 +3,56 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class GameController : MonoBehaviour
+namespace Bee
 {
-  public bool gameStarted;
-
-  [Header ("References")]
-  public ObstacleManager obstacleManager;
-  public FlowerManager flowerManager;
-
-  void Awake()
+  public class GameController : StateListener
   {
-    Assert.IsNotNull (obstacleManager);    
-    Assert.IsNotNull (flowerManager);    
-    GameGlobals.Instance.gameController = this;
-  }
+    public bool gameStarted;
 
-  public void Start ()
-  {
-    StartCoroutine (StartGameCoroutine ());
-  }
+    [Header ("References")]
+    public ObstacleManager obstacleManager;
+    public FlowerManager flowerManager;
 
-  void OnEnable ()
-  {
-    Logger.LogDivider ();
-    Logger.Log ("Enable game controller");
-  }
+    public override void Awake()
+    {
+      base.Awake ();
 
-  IEnumerator StartGameCoroutine ()
-  {
-    GameGlobals.Instance.registry.UnPause ();
-    gameStarted = true;
-    flowerManager.Activate ();
-    obstacleManager.Activate ();
+      Assert.IsNotNull (obstacleManager);    
+      Assert.IsNotNull (flowerManager);    
+      GameGlobals.Instance.gameController = this;
+    }
 
-    int introTime = GameGlobals.Instance.registry.introTime;
+    public override bool Enter ()
+    {
+      if (!base.Enter ()) return false;
 
-    Logger.Log ($"Start game in {introTime} seconds");
+      StartCoroutine (StartGameCoroutine ());
 
-    yield return new WaitForSeconds (introTime);
+      return true;
+    }
 
-    Logger.Log ("Start game");
+    void OnEnable ()
+    {
+      Logger.LogDivider ();
+      Logger.Log ("Enable game controller");
+    }
 
-    obstacleManager.StartSpawningObstacles ();
+    IEnumerator StartGameCoroutine ()
+    {
+      GameGlobals.Instance.registry.UnPause ();
+      gameStarted = true;
+      flowerManager.Activate ();
+      obstacleManager.Activate ();
+
+      int introTime = GameGlobals.Instance.registry.introTime;
+
+      Logger.Log ($"Start game in {introTime} seconds");
+
+      yield return new WaitForSeconds (introTime);
+
+      Logger.Log ("Start game");
+
+      obstacleManager.StartSpawningObstacles ();
+    }
   }
 }

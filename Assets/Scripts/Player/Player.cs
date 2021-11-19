@@ -3,47 +3,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Block
+namespace Bee
 {
-  public bool alive;
-  public static Action onPlayerDeath;
-
-  public InputHandler inputHandler;
-
-  void Awake ()
+  public class Player : Block
   {
-    GameGlobals.Instance.player = this;
-  }
-  
-  public override void Start()
-  {
-    base.Start ();
+    public bool alive;
+    public static Action onPlayerDeath;
 
-    alive = true;
-    Logger.Log ($"{name} is alive!", this);
-  }
+    public InputHandler inputHandler;
 
-  public void Die ()
-  {
-    if (alive)
+    public override void Awake ()
     {
-      StartCoroutine (DieCoroutine ());
+      base.Awake ();
+      
+      GameGlobals.Instance.player = this;
     }
-    else
+    
+    public override void Start()
     {
-      Logger.LogWarning ($"{name} is already dead!", this);
+      base.Start ();
+
+      alive = true;
+      Logger.Log ($"{name} is alive!", this);
     }
-  }
 
-  IEnumerator DieCoroutine ()
-  {
-    GameGlobals.Instance.registry.Pause ();
+    public void Die ()
+    {
+      if (alive)
+      {
+        StartCoroutine (DieCoroutine ());
+      }
+      else
+      {
+        Logger.LogWarning ($"{name} is already dead!", this);
+      }
+    }
 
-    Logger.Log ($"{name} has died!", this);
-    alive = false;
+    IEnumerator DieCoroutine ()
+    {
+      GameGlobals.Instance.registry.Pause ();
 
-    yield return new WaitForSeconds (GameGlobals.Instance.registry.deathTimeout);
+      Logger.Log ($"{name} has died!", this);
+      alive = false;
 
-    onPlayerDeath?.Invoke ();
+      yield return new WaitForSeconds (GameGlobals.Instance.registry.deathTimeout);
+
+      onPlayerDeath?.Invoke ();
+    }
   }
 }

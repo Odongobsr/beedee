@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+namespace Bee
+{
 [CreateAssetMenu (
   fileName = "Event - Switch scene",
   menuName = "Events/Switch scene"
@@ -51,4 +53,5 @@ public class Event_SwitchScene : AbstractEvent
 
         Logger.Log ($"{current} scene has unloaded");
     }
+  }
 }

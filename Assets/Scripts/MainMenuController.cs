@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-/// <summary>
-/// Controls main menu state of game
-/// </summary>
-public class MainMenuController : MonoBehaviour
+namespace Bee
 {
-  [Header ("References")]
-  public SwitchToGameController switchToGameController;
-
-  void Awake ()
+  /// <summary>
+  /// Controls main menu state of game
+  /// </summary>
+  public class MainMenuController : MonoBehaviour
   {
-    Assert.IsNotNull (switchToGameController);
-  }
+    [Header ("References")]
+    public SwitchToGameController switchToGameController;
 
-  void OnEnable ()
-  {
-    Logger.LogDivider ();
-    Logger.Log ("Enable main menu controller");
+    void Awake ()
+    {
+      Assert.IsNotNull (switchToGameController);
+    }
+
+    void OnEnable ()
+    {
+      Logger.LogDivider ();
+      Logger.Log ("Enable main menu controller");
+    }
   }
 }

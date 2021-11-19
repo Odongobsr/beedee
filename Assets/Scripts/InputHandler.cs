@@ -3,55 +3,58 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InputHandler : MonoBehaviour
+namespace Bee
 {
-  public bool moveLeft;
-  public bool moveRight;
+  public class InputHandler : MonoBehaviour
+  {
+    public bool moveLeft;
+    public bool moveRight;
 
-  void Update()
-  { 
-// #if !UNITY_EDITOR
-    // if (Application.platform != RuntimePlatform.Android)
-    if (!GameGlobals.Instance.registry.useTouchInput)
-    {
-      float horizontalInput = Input.GetAxisRaw ("Horizontal");
-      if (horizontalInput > 0)    
+    void Update()
+    { 
+  // #if !UNITY_EDITOR
+      // if (Application.platform != RuntimePlatform.Android)
+      if (!GameGlobals.Instance.registry.useTouchInput)
       {
-        moveRight = true;
-        moveLeft = false;
+        float horizontalInput = Input.GetAxisRaw ("Horizontal");
+        if (horizontalInput > 0)    
+        {
+          moveRight = true;
+          moveLeft = false;
+        }
+        else if (horizontalInput < 0)
+        {
+          moveRight = false; 
+          moveLeft = true; 
+        }
+        else
+        {
+          moveRight = false;
+          moveLeft = false;
+        }
+        // Logger.Log ($"Horizontal Input: {horizontalInput}");
       }
-      else if (horizontalInput < 0)
-      {
-        moveRight = false; 
-        moveLeft = true; 
-      }
-      else
-      {
-        moveRight = false;
-        moveLeft = false;
-      }
-      // Logger.Log ($"Horizontal Input: {horizontalInput}");
+  // #endif
     }
-// #endif
-  }
 
-  public void MoveLeftDown ()
-  {
-    moveLeft = true;
-  }
+    public void MoveLeftDown ()
+    {
+      moveLeft = true;
+    }
 
-  public void MoveLeftUp ()
-  {
-    moveLeft = false;
-  }
+    public void MoveLeftUp ()
+    {
+      moveLeft = false;
+    }
 
-  public void MoveRightDown ()
-  {
-    moveRight = true;
-  }
-  
-  public void MoveRightUp ()
-  {
-    moveRight = false;
+    public void MoveRightDown ()
+    {
+      moveRight = true;
+    }
+    
+    public void MoveRightUp ()
+    {
+      moveRight = false;
+    }
   }
 }

@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AbstractVelocityModifier : MonoBehaviour
+namespace Bee
 {
-  public virtual Vector2 ModifyVelocity (Block block)
+  public abstract class AbstractVelocityModifier : StateListener
   {
-    return new Vector3 ();
-  } 
+    public virtual Vector2 ModifyVelocity (Block block)
+    {
+      return new Vector3 ();
+    } 
+  }
 }

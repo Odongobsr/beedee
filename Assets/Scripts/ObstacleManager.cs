@@ -3,35 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class ObstacleManager : AbstractGameObject
+namespace Bee
 {
-  [Header ("References")]
-  public ObjectPool obstaclePool;
-  public ObjectSpawner obstacleSpawner;
-
-  [Header ("Runtime only")]
-  public Stack<Block> inactiveObstacles = new Stack<Block> ();  
-  public Stack<Block> activeObstacles = new Stack<Block> ();  
-
-  void Awake ()
+  public class ObstacleManager : AbstractGameObject
   {
-    Assert.IsNotNull (obstaclePool.holder);
-    Assert.IsNotNull (obstacleSpawner);
-  }
+    [Header ("References")]
+    public ObjectPool obstaclePool;
+    public ObjectSpawner obstacleSpawner;
 
-  public override void Activate ()
-  {
-    base.Activate ();
+    [Header ("Runtime only")]
+    public Stack<Block> inactiveObstacles = new Stack<Block> ();  
+    public Stack<Block> activeObstacles = new Stack<Block> ();  
 
-    // create obstacle object pool
-    obstaclePool.CreateObjects (
-      objects: GameGlobals.Instance.registry.GetObstacleDataObjects (),
-      count: GameGlobals.Instance.registry.obstaclePoolSize
-    );
-  }
+    void Awake ()
+    {
+      Assert.IsNotNull (obstaclePool.holder);
+      Assert.IsNotNull (obstacleSpawner);
+    }
 
-  public void StartSpawningObstacles ()
-  {
-    obstacleSpawner.StartSpawningObjects (wait: GameGlobals.Instance.registry.obstacleWaitTime);
+    public override void Activate ()
+    {
+      base.Activate ();
+
+      // create obstacle object pool
+      obstaclePool.CreateObjects (
+        objects: GameGlobals.Instance.registry.GetObstacleDataObjects (),
+        count: GameGlobals.Instance.registry.obstaclePoolSize
+      );
+    }
+
+    public void StartSpawningObstacles ()
+    {
+      obstacleSpawner.StartSpawningObjects (wait: GameGlobals.Instance.registry.obstacleWaitTime);
+    }
   }
 }

@@ -13,12 +13,17 @@ MonoBehaviour:
   m_Name: Registry
   m_EditorClassIdentifier: 
   me: {fileID: 11400000}
+  worldState: 2
   paused: 0
   debugMode: 0
   introTime: 1
   globalSpeedMultiplier: 1.9
   playerMoveSpeed: 3.5
   deathTimeout: 1.5
+  initialState: 2
+  states:
+  - {fileID: 11400000, guid: 8222bca8b29bee14e992c29df6067445, type: 2}
+  - {fileID: 11400000, guid: aeb60b42714117445a7cae281c1197c3, type: 2}
   useTouchInput: 1
   obstacleWaitTime: {fileID: 11400000, guid: 037aa910cf83e4447a3ef81d93a5ff14, type: 2}
   flowerWaitTime: {fileID: 11400000, guid: df3f40fa0ddb3b74c86d7365ce9dd1d0, type: 2}

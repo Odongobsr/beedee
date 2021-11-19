@@ -2,27 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMover : AbstractVelocityModifier
+namespace Bee
 {
-  public float speed;
-  public Player player;
-
-  public override Vector2 ModifyVelocity (Block block)
+  public class PlayerMover : AbstractVelocityModifier
   {
-    Vector2 desiredVelocity = new Vector2 ();
+    public float speed;
+    public Player player;
 
-    if (player.alive)
+    public override Vector2 ModifyVelocity (Block block)
     {
-      if (player.inputHandler.moveLeft)
-      {
-        desiredVelocity = new Vector2(-GameGlobals.Instance.registry.playerMoveSpeed, 0);
-      }
-      else if (player.inputHandler.moveRight)
-      {
-        desiredVelocity = new Vector2(GameGlobals.Instance.registry.playerMoveSpeed, 0);
-      }
-    }
+      Vector2 desiredVelocity = new Vector2 ();
 
-    return desiredVelocity;
+      if (player.alive)
+      {
+        if (player.inputHandler.moveLeft)
+        {
+          desiredVelocity = new Vector2(-GameGlobals.Instance.registry.playerMoveSpeed, 0);
+        }
+        else if (player.inputHandler.moveRight)
+        {
+          desiredVelocity = new Vector2(GameGlobals.Instance.registry.playerMoveSpeed, 0);
+        }
+      }
+
+      return desiredVelocity;
+    }
   }
 }

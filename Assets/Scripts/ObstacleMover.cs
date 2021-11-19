@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstacleMover : AbstractVelocityModifier
+namespace Bee
 {
-  public override Vector2 ModifyVelocity (Block block)
+  public class ObstacleMover : AbstractVelocityModifier
   {
-    Vector2 desiredVelocity = new Vector2 ();
+    public override Vector2 ModifyVelocity (Block block)
+    {
+      Vector2 desiredVelocity = new Vector2 ();
 
-    desiredVelocity += 
-      (Vector2) GameGlobals.Instance.registry.obstacleSpeed;
+      desiredVelocity += 
+        (Vector2) GameGlobals.Instance.registry.obstacleSpeed;
 
-    return desiredVelocity;
+      return desiredVelocity;
+    }
   }
 }

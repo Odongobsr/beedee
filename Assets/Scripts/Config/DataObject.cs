@@ -2,22 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu (
-  fileName ="Data Object",
-  menuName = "Data Object"
-)]
-public class DataObject : AbstractScriptableObject
+namespace Bee
 {
-  public AbstractPoolable prefab;
-
-  [ContextMenu ("Assign data to prefab")]
-  public override void OnValidate()
+  [CreateAssetMenu (
+    fileName ="Data Object",
+    menuName = "Data Object"
+  )]
+  public class DataObject : AbstractScriptableObject
   {
-    base.OnValidate();
+    public AbstractPoolable prefab;
 
-    if (prefab && null == prefab.data)
+    [ContextMenu ("Assign data to prefab")]
+    public override void OnValidate()
     {
-      prefab.data = this;
+      base.OnValidate();
+
+      if (prefab && null == prefab.data)
+      {
+        prefab.data = this;
+      }
     }
   }
 }

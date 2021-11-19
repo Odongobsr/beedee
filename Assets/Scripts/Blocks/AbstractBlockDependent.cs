@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// A component that is part of a block
-/// </summary>
-public abstract class AbstractBlockDependent : AbstractGameComponent
+
+namespace Bee
 {
-  public Block block;
+  /// <summary>
+  /// A component that is part of a block
+  /// </summary>
+  public abstract class AbstractBlockDependent : AbstractGameComponent
+  {
+    public Block block;
+  }
 }

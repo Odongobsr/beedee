@@ -7,40 +7,44 @@ using UnityEngine.Assertions;
 using UnityEngine.Audio;
 using System.Text;
 
-public class GameGlobals : ScriptableObject
+namespace Bee
 {
-  public Player player;
-  public Registry registry;
-  public GameController gameController;
-
-  private static GameGlobals _instance;
-  public static GameGlobals Instance
+  public class GameGlobals : ScriptableObject
   {
-    get
+    public Player player;
+    public Registry registry;
+    public GameController gameController;
+    public StateMachine stateMachine;
+
+    private static GameGlobals _instance;
+    public static GameGlobals Instance
     {
-      if (null == _instance)
+      get
       {
-        _instance = FindObjectOfType<GameGlobals> ();
+        if (null == _instance)
+        {
+          _instance = FindObjectOfType<GameGlobals> ();
+        }
+        if (null == _instance)
+        {
+          _instance = CreateInstance<GameGlobals> ();
+          _instance.hideFlags = HideFlags.HideAndDontSave;
+        }
+        return _instance;
       }
-      if (null == _instance)
+
+      private set
       {
-        _instance = CreateInstance<GameGlobals> ();
-        _instance.hideFlags = HideFlags.HideAndDontSave;
+        _instance = value;
       }
-      return _instance;
     }
 
-    private set
-    {
-      _instance = value;
-    }
-  }
-
-  public void Awake()
+    public void Awake()
     {
       Logger.Log ("GameGlobals awake");
 
       registry = Resources.Load ("Registry") as Registry;
       registry.Setup ();
     }
+  }
 }

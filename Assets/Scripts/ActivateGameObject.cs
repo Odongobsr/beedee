@@ -2,16 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActivateGameObject : MonoBehaviour
+namespace Bee
 {
-  public bool activate;
-  public GameObject obj;
-
-  void Start ()
+  public class ActivateGameObject : StateListener
   {
-    if (obj)
+    public bool activate;
+    public GameObject obj;
+
+    public override bool Enter ()
     {
-      obj.SetActive (activate);
+      if (!base.Enter ()) return false;
+
+      if (obj)
+      {
+        obj.SetActive (activate);
+      }
+
+      return true;
     }
   }
 }

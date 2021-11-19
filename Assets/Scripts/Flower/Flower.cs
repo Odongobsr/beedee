@@ -2,28 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Flower : Block
+namespace Bee
 {
-  public bool alive;
-
-  public override void Start()
+  public class Flower : Block
   {
-    base.Start ();
-    
-    alive = true;
-    // Logger.Log ($"{name} is alive!", this);
-  }
+    public bool alive;
 
-  public void Die ()
-  {
-    if (alive)
+    public override void Start()
     {
-      Logger.Log ($"{name} has died!", this);
-      alive = false;
+      base.Start ();
+      
+      alive = true;
+      // Logger.Log ($"{name} is alive!", this);
     }
-    else
+
+    public void Die ()
     {
-      Logger.LogWarning ($"{name} is already dead!", this);
+      if (alive)
+      {
+        Logger.Log ($"{name} has died!", this);
+        alive = false;
+      }
+      else
+      {
+        Logger.LogWarning ($"{name} is already dead!", this);
+      }
     }
   }
 }

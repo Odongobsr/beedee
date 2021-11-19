@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StartGame : MonoBehaviour
+namespace Bee
 {
-  public void StartTheGame ()
+  public class StartGame : MonoBehaviour
   {
-    if (GameGlobals.Instance.registry.paused)
+    public void StartTheGame ()
     {
-      GameGlobals.Instance.registry.UnPause ();
+      if (GameGlobals.Instance.registry.paused)
+      {
+        GameGlobals.Instance.registry.UnPause ();
+      }
     }
   }
 }
