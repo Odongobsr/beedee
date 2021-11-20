@@ -16,19 +16,36 @@ namespace Bee
     public WorldState worldState;
     public bool paused;
     public bool debugMode;
+    public bool hasShownIntroCutscene;
+    
     /// <summary>
     /// How long do we wait before beginning gameplay
     /// </summary>
     public int introTime;
-    [Range (0.5f, 2)]
+    [Range (0.5f, 3)]
     public float globalSpeedMultiplier;
     [Range (1, 5)]
     public float playerMoveSpeed = 3;
     [Range (1, 5)]
     public float deathTimeout = 1;
 
+    [Range (1, 7)]
+    public float cutsceneFrameTime;
+    [Range (0, 3)]
+    public float defaultFadeTime;
+    /// <summary>
+    /// How much lighter does the ground get when BeeDee lands on a flower?
+    /// </summary>
+    [Range (-1, 1)]
+    public float groundLightenValue;
+
+    /// <summary>
+    /// How much time does it take to lighten the ground get when BeeDee lands on a flower?
+    /// </summary>
+    [Range (0, 5)]
+    public float groundLightenTime;
+
     [Header ("States")]
-    public State initialState;
     public List<AbstractState> states;
 
     [Header ("Input")]
@@ -64,6 +81,10 @@ namespace Bee
     [Header ("Tags")]
     public string obstacleTag;
     public string flowerTag;
+    public string playerTag;
+
+    [Header ("UI")]
+    public List<StyleAsset> styles;
     
     void Awake ()
     {
@@ -72,6 +93,8 @@ namespace Bee
     public void Setup ()
     {
       Assert.IsTrue (obstacleDataList.Count > 0, "No obstacle data");
+      Assert.IsTrue (styles.Count > 0, "No UI styles");
+      Assert.IsTrue (states.Count > 0, "No states");
 
       for (int i = 0; i < obstacleDataList.Count; i++)
       {
@@ -85,14 +108,14 @@ namespace Bee
 
     public float GetGlobalSpeed ()
     {
-      if (paused)
-      {
-        return 0;
-      }
-      else
-      {
+      // if (paused)
+      // {
+      //   return 0;
+      // }
+      // else
+      // {
         return globalSpeedMultiplier;
-      }
+      // }
     }
 
     public List<DataObject> GetObstacleDataObjects ()
@@ -121,11 +144,29 @@ namespace Bee
       return flowers;
     }
 
-    public AbstractState GetState(State state)
+    public AbstractState GetState(State _state)
     {
-      return states.Find (x => x.state == state);
+      return states.Find (x => x.state == _state);
     }
 
+    public StyleAsset GetStyle (StyleName _name)
+    {
+      StyleAsset style = styles.Find (x => x.styleName == _name);
+
+      if (null != style)
+      {
+        return style;
+      }
+
+      style = styles [0];
+
+      Logger.LogWarning (
+        $"{_name} - style not found. Returning default style {style}",
+        style
+      );
+
+      return style;
+    }
     public void SetWorldState (WorldState _worldState)
     {
       worldState = _worldState;

@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventRunner : MonoBehaviour
+namespace Bee
 {
-  public List<AbstractEvent> events = new List<AbstractEvent> ();
-
-  public void RunAllEvents ()
+  public class EventRunner : MonoBehaviour
   {
-    for (int e = 0; e < events.Count; e++)
+    public List<AbstractEvent> events = new List<AbstractEvent> ();
+
+    public void RunAllEvents ()
     {
-      events [e].RunEvent (runner: this);
+      for (int e = 0; e < events.Count; e++)
+      {
+        // events [e].RunEvent (runner: this);
+        events [e].RunEvent (runner: this);
+      }
     }
   }
 }

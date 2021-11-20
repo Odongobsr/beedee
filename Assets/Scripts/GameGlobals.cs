@@ -15,6 +15,10 @@ namespace Bee
     public Registry registry;
     public GameController gameController;
     public StateMachine stateMachine;
+    public CoroutineRunner runner;
+    public GameIntroPrompt gameIntroPrompt;
+    public UIScreen playerButtonsUIScreen;
+    public SpriteRendererController darkGroundSprite;
 
     private static GameGlobals _instance;
     public static GameGlobals Instance

@@ -49,10 +49,10 @@ namespace Bee
 
     public AbstractPoolable SpawnObject (Transform parent = null)
     {
-      if (GameGlobals.Instance.registry.paused)
-      {
-        return null;
-      }
+      // if (GameGlobals.Instance.registry.paused)
+      // {
+        // return null;
+      // }
       
       if (objectPool.inactiveObjects.Count == 0)
       {

@@ -35,6 +35,11 @@ namespace Bee
     // Update is called once per frame
     public override void MyFixedUpdate () 
     {
+      if (!isActive)
+      {
+        return;
+      }
+      
       base.MyFixedUpdate ();
 
       // Time.time is time since the game began, vs. deltaTime, which is time since last frame

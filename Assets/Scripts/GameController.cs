@@ -12,6 +12,7 @@ namespace Bee
     [Header ("References")]
     public ObstacleManager obstacleManager;
     public FlowerManager flowerManager;
+    public Event_SwitchScene switchToMainMenu;
 
     public override void Awake()
     {
@@ -19,7 +20,15 @@ namespace Bee
 
       Assert.IsNotNull (obstacleManager);    
       Assert.IsNotNull (flowerManager);    
+      Assert.IsNotNull (switchToMainMenu);    
       GameGlobals.Instance.gameController = this;
+    }
+
+    public override void Start ()
+    {
+      base.Start ();
+
+      GameGlobals.Instance.playerButtonsUIScreen.Deactivate (0);
     }
 
     public override bool Enter ()
@@ -31,6 +40,16 @@ namespace Bee
       return true;
     }
 
+    public override void MyUpdate()
+    {
+      base.MyUpdate();
+
+      if (Input.GetKeyDown (KeyCode.Escape))
+      {
+        switchToMainMenu.RunEvent (this);
+      }
+    }
+
     void OnEnable ()
     {
       Logger.LogDivider ();
@@ -39,7 +58,9 @@ namespace Bee
 
     IEnumerator StartGameCoroutine ()
     {
-      GameGlobals.Instance.registry.UnPause ();
+      GameGlobals.Instance.playerButtonsUIScreen.Activate ();
+
+      // GameGlobals.Instance.registry.UnPause ();
       gameStarted = true;
       flowerManager.Activate ();
       obstacleManager.Activate ();

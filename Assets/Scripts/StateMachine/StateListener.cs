@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Bee
 {
@@ -14,6 +15,11 @@ namespace Bee
 
     public List<State> activeStates;
     public List<StateListener> listeners;
+
+    public virtual void CheckAssertions ()
+    {
+
+    }
 
     /// <summary>
     /// if state listener needs to set isSetup state it should do so here
@@ -43,7 +49,7 @@ namespace Bee
         for (int s = 0; s < activeStates.Count; s++)
         {
           GameGlobals.Instance.stateMachine.AddListener (listener: this, state: activeStates[s]);
-          Logger.Log ($"Add {name} to state {activeStates[s]}", this);
+          // Logger.Log ($"Add {name} to state {activeStates[s]}", this);
         } 
       // }
 

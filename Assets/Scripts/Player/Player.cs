@@ -41,8 +41,17 @@ namespace Bee
 
     IEnumerator DieCoroutine ()
     {
-      GameGlobals.Instance.registry.Pause ();
+      if (GameGlobals.Instance.registry.worldState != WorldState.Complete)
+      {
+        yield return null;
+      }
 
+      // GameGlobals.Instance.registry.Pause ();
+
+      GameGlobals.Instance.registry.SetWorldState (WorldState.Retired);
+
+      FlowerManager.stepCount = 0;
+      
       Logger.Log ($"{name} has died!", this);
       alive = false;
 

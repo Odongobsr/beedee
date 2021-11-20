@@ -1,0 +1,33 @@
+Using pre-set license
+Built from '2020.3/staging' branch; Version is '2020.3.0f1 (c7b5465681fb) revision 13088070'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Pro; OS build 17763.1282; Version 1809; 64bit' Language: 'en' Physical Memory: 8102 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker11
+-projectPath
+C:/Stuff/Games/Ecoexistence/FlappyBee/FlappyBee
+-logFile
+Logs/AssetImportWorker11.log
+-srvPort
+51449
+Successfully changed project path to: C:/Stuff/Games/Ecoexistence/FlappyBee/FlappyBee
+C:/Stuff/Games/Ecoexistence/FlappyBee/FlappyBee
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 2284.68 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.0f1 (c7b5465681fb)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Stuff/Games/Ecoexistence/FlappyBee/FlappyBee/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) HD Graphics 520 (ID=0x1916)
+    Vendor:   
+    VRAM:     4051 MB
+    Driver:   22.20.16.4836

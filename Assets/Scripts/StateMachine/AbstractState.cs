@@ -21,6 +21,12 @@ namespace Bee
       {
         listeners [l].Initialise ();
       }
+      
+      Logger.Log(
+        _str: $"Initialise state {state}", 
+        _context: this,
+        _color: Color.magenta.ToString ()
+      );
     }
     public virtual void Setup (List<StateListener> listeners) 
     {
@@ -28,6 +34,12 @@ namespace Bee
       {
         listeners [l].Setup ();
       }
+
+      Logger.Log(
+        _str: $"Setup state {state}", 
+        _context: this,
+        _color: Color.magenta.ToString ()
+      );
     }
     
     public virtual void Pause (List<StateListener> listeners) 
@@ -52,6 +64,11 @@ namespace Bee
       {
         listeners [l].Enter ();
       }
+      Logger.Log(
+        _str: $"Enter state {state}", 
+        _context: this,
+        _color: Color.magenta.ToString ()
+      );
     }
 
     public virtual void Exit (List<StateListener> listeners) 
@@ -59,8 +76,14 @@ namespace Bee
       for (int l = 0; l < listeners.Count; l++)
       {
         listeners [l].Exit ();
-      }
+      }  
+      Logger.Log(
+        _str: $"Exit state {state}", 
+        _context: this,
+        _color: "red"
+      );
     }
+
     public virtual void MyUpdate (List<StateListener> listeners) 
     {
       for (int l = 0; l < listeners.Count; l++)

@@ -8,7 +8,7 @@ using UnityEngine;
 )]
 public class Event_DestroyMe : AbstractEvent
 {
-  public override void RunEvent(MonoBehaviour runner = null)
+  public override void RunEvent(MonoBehaviour runner)
   {
     Destroy (runner.gameObject);
   }

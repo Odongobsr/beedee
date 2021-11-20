@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Bee
 {
@@ -24,7 +26,7 @@ namespace Bee
         listenerDict [state].AddUnique (item: listener);
         Logger.Log ($"Add state listener key - {state}", null);
       }
-      Logger.Log ($"Add state listener to {state} - {listener.name}", listener);
+      // Logger.Log ($"Add state listener to {state} - {listener.name}", listener);
     }
 
     public void RemoveListener (StateListener listener, State state)
@@ -44,8 +46,6 @@ namespace Bee
       GameGlobals.Instance.stateMachine = this;
       active = true;
 
-      GameGlobals.Instance.registry.worldState = WorldState.Null;
-
       for (int i = 0; i < GameGlobals.Instance.registry.states.Count; i++)
       {
         State state = GameGlobals.Instance.registry.states [i].state;
@@ -59,7 +59,7 @@ namespace Bee
       // states = GameGlobals.Instance.registry.states;
       // currentState = GetInitialState();
 
-      StartCoroutine (ChangeStateCoroutine (GetInitialState().state));
+      // StartCoroutine (ChangeStateCoroutine (GetInitialState().state));
     }
 
     void Setup()
@@ -131,12 +131,25 @@ namespace Bee
       }
     }
 
-    public IEnumerator ChangeStateCoroutine (State newState)
+    public void ChangeState (State _newState)
     {
-      if (!listenerDict.ContainsKey (newState)) // check if newState in keys
+      StartCoroutine (ChangeStateCoroutine (_newState));
+    }
+
+    public IEnumerator ChangeStateCoroutine (State _newState)
+    {
+      if (currentState && _newState == currentState.state)
+      {
+        Logger.LogWarning (
+          $"Current state is already {currentState.state}",
+          currentState
+        );
+        yield return null;
+      }
+      if (!listenerDict.ContainsKey (_newState)) // check if newState in keys
       {
         Logger.LogWarningList (
-          _title: $"{newState} not found in list of states",
+          _title: $"{_newState} not found in list of states",
           _message: listenerDict.PrintKeys (),
           this
         );
@@ -152,24 +165,21 @@ namespace Bee
 
       GameGlobals.Instance.registry.SetWorldState (WorldState.SettingUp);
 
-      currentState = GetState (newState);
+      currentState = GetState (_newState);
 
       yield return new WaitForSeconds (currentState.introTime / 2);
 
       currentState.Setup(listeners: listenerDict [currentState.state]);
-      Logger.Log($"Setup state {currentState.state}", currentState);
 
       yield return new WaitForEndOfFrame ();
       
       currentState.Initialise(listeners: listenerDict [currentState.state]);
-      Logger.Log($"Initialise state {currentState.state}", currentState);
 
       yield return new WaitForSeconds (currentState.introTime / 2);
 
       GameGlobals.Instance.registry.SetWorldState (WorldState.Complete);
 
       currentState.Enter(listeners: listenerDict [currentState.state]);
-      Logger.Log($"Enter state {currentState.state}", currentState);
     }
 
     public AbstractState GetState (State state)
@@ -177,10 +187,10 @@ namespace Bee
       return GameGlobals.Instance.registry.GetState (state);
     }
 
-    private AbstractState GetInitialState()
-    {
-      return GameGlobals.Instance.registry.GetState (GameGlobals.Instance.registry.initialState);
-    }
+    // private AbstractState GetInitialState()
+    // {
+      // return GameGlobals.Instance.registry.GetState (GameGlobals.Instance.registry.initialState);
+    // }
 
     public void TogglePause ()
     {
@@ -201,6 +211,7 @@ namespace Bee
       }
     }
 
+#if UNITY_EDITOR
     private void OnGUI()
     {
         string content = currentState != null ? currentState.name : "(no current state)";
@@ -208,5 +219,6 @@ namespace Bee
 
         GUILayout.Label($"<color='white'><size=40>{content}</size></color>");
     }
+#endif
   }
 }

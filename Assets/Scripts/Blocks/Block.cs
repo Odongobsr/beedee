@@ -33,6 +33,11 @@ namespace Bee
 
     public override void MyFixedUpdate()
     {
+      if (!isActive)
+      {
+        return;
+      }
+      
       base.MyFixedUpdate ();
       
       // if (GameGlobals.Instance.registry.paused)

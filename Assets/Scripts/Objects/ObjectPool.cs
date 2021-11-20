@@ -35,7 +35,7 @@ namespace Bee
           AbstractPoolable obj = Instantiate (
             original: objects [i].prefab,
             position: Vector3.zero,
-            rotation: Quaternion.identity,
+            rotation: objects [i].prefab.transform.rotation,
             parent:holder
           );
         

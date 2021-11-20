@@ -3,45 +3,56 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class SwitchToGameController : MonoBehaviour
+namespace Bee
 {
-  [Header ("References")]
-  public GameObject switcher;
-  public AudioSource audioSource;
-  
-  [Header ("Runtime only")]
-  public bool switchingToGameScene;
-
-  void Awake()
+  public class SwitchToGameController : MonoBehaviour
   {
-    Assert.IsNotNull (switcher);    
-    Assert.IsNotNull (audioSource);    
-    Assert.IsNotNull (audioSource.clip);    
-  }
+    [Header ("References")]
+    public GameObject switcher;
+    public AudioSource audioSource;
+    public MainMenuController mainMenuController;
+    
+    [Header ("Runtime only")]
+    public bool switchingToGameScene;
 
-  void Start()
-  {
-    switcher.gameObject.SetActive (false);
-  }
-
-  void Update()
-  {
-    if (!switchingToGameScene)
+    void Awake()
     {
-      // detect user input
-      if (Input.GetMouseButtonDown (0) || Input.GetKeyDown (KeyCode.Space))    
+      Assert.IsNotNull (switcher);    
+      Assert.IsNotNull (audioSource);    
+      Assert.IsNotNull (audioSource.clip);    
+    }
+
+    void Start()
+    {
+      switcher.gameObject.SetActive (false);
+    }
+
+    void Update()
+    {
+      if (!switchingToGameScene)
       {
-        SwitchToGameScene ();
+        // detect user input
+        if (Input.GetMouseButtonDown (0) || Input.GetKeyDown (KeyCode.Space))    
+        {
+          if (mainMenuController.introCutscene.isPlaying)
+          {
+            mainMenuController.introCutscene.StopCutscene ();
+          }
+          else
+          {
+            SwitchToGameScene ();
+          }
+        }
       }
     }
-  }
 
-  void SwitchToGameScene ()
-  {
-    Logger.Log ("Try switch to game scene");
-    switchingToGameScene = true;
+    void SwitchToGameScene ()
+    {
+      Logger.Log ("Try switch to game scene");
+      switchingToGameScene = true;
 
-    switcher.gameObject.SetActive (true);
-    audioSource.Play ();
+      switcher.gameObject.SetActive (true);
+      audioSource.Play ();
+    }
   }
 }

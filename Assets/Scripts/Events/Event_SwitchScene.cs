@@ -13,45 +13,51 @@ public class Event_SwitchScene : AbstractEvent
 {
   public Scenes nextScene;
 
-  public override void RunEvent(MonoBehaviour runner = null)
+  public override void RunEvent(MonoBehaviour runner)
   {
+    runner.StopAllCoroutines ();
+    
     // Logger.Log ($"Try switch scene to {nextScene}");
     runner.StartCoroutine (LoadYourAsyncScene (nextScene.ToString ()));
   }
 
   IEnumerator LoadYourAsyncScene(string next)
     {
-        Logger.Log ($"Try load {next} scene");
+      SceneManager.LoadScene (next);
+      yield return new WaitForEndOfFrame ();
 
-        // The Application loads the Scene in the background as the current Scene runs.
-        // This is particularly good for creating loading screens.
-        // You could also load the Scene by using sceneBuildIndex. In this case Scene2 has
-        // a sceneBuildIndex of 1 as shown in Build Settings.
+        // string current = SceneManager.GetActiveScene ().name;
 
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(next, LoadSceneMode.Additive);
+        // Logger.Log ($"Try unload {current} scene");
 
-        // Wait until the asynchronous scene fully loads
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-
-        Logger.Log ($"{next} scene has loaded");
-
-        string current = SceneManager.GetActiveScene ().name;
-
-        Logger.Log ($"Try unload {current} scene");
-
-        // unload current scene
-        asyncLoad = SceneManager.UnloadSceneAsync (current);
+        // // unload current scene
+        // AsyncOperation asyncLoad = asyncLoad = SceneManager.UnloadSceneAsync (current);
         
-        // Wait until the asynchronous scene fully unloads
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
+        // // Wait until the asynchronous scene fully unloads
+        // while (!asyncLoad.isDone)
+        // {
+        //   yield return null;
+        // }
 
-        Logger.Log ($"{current} scene has unloaded");
+        // Logger.Log ($"{current} scene has unloaded");
+
+        // Logger.Log ($"Try load {next} scene");
+
+        // // The Application loads the Scene in the background as the current Scene runs.
+        // // This is particularly good for creating loading screens.
+        // // You could also load the Scene by using sceneBuildIndex. In this case Scene2 has
+        // // a sceneBuildIndex of 1 as shown in Build Settings.
+
+        // SceneManager.LoadSceneAsync(next, LoadSceneMode.Additive);
+
+        // // Wait until the asynchronous scene fully loads
+        // while (!asyncLoad.isDone)
+        // {
+        //     yield return null;
+        // }
+
+        // Logger.Log ($"{next} scene has loaded");
+        
     }
   }
 }

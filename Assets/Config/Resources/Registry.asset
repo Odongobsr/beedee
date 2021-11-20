@@ -16,11 +16,15 @@ MonoBehaviour:
   worldState: 2
   paused: 0
   debugMode: 0
+  hasShownIntroCutscene: 0
   introTime: 1
-  globalSpeedMultiplier: 1.9
+  globalSpeedMultiplier: 2
   playerMoveSpeed: 3.5
   deathTimeout: 1.5
-  initialState: 2
+  cutsceneFrameTime: 7
+  defaultFadeTime: 0
+  groundLightenValue: -0.1
+  groundLightenTime: 2
   states:
   - {fileID: 11400000, guid: 8222bca8b29bee14e992c29df6067445, type: 2}
   - {fileID: 11400000, guid: aeb60b42714117445a7cae281c1197c3, type: 2}
@@ -38,6 +42,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cf3274697f89f1f4bae9d3df0f9907b2, type: 2}
   - {fileID: 11400000, guid: 756852a68095afe43b18b1f5301bb352, type: 2}
   - {fileID: 11400000, guid: b3c62942091c03340938ff3736a0932c, type: 2}
+  - {fileID: 11400000, guid: 5ca8277ff360c3a42a981b92e912d4f9, type: 2}
+  - {fileID: 11400000, guid: 3c1230087a6af5444bd9028bd756f632, type: 2}
+  - {fileID: 11400000, guid: 5630a8dd4ef24814192fb127dd493fa8, type: 2}
   flowerInterval: 10
   flowerPoolSize: 5
   flowerDataList:
@@ -46,3 +53,6 @@ MonoBehaviour:
   levels: []
   obstacleTag: Obstacle
   flowerTag: Flower
+  playerTag: Player
+  styles:
+  - {fileID: 11400000, guid: 95c6adc016c26994fad1b4271dd7ae43, type: 2}

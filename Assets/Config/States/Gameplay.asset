@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   me: {fileID: 11400000}
   state: 2
-  introTime: 0
+  introTime: 3
   exitTime: 0

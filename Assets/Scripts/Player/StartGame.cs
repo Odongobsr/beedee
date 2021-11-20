@@ -8,10 +8,10 @@ namespace Bee
   {
     public void StartTheGame ()
     {
-      if (GameGlobals.Instance.registry.paused)
-      {
-        GameGlobals.Instance.registry.UnPause ();
-      }
+      // if (GameGlobals.Instance.registry.paused)
+      // {
+      //   GameGlobals.Instance.registry.UnPause ();
+      // }
     }
   }
 }

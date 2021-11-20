@@ -43,6 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d43a2b0fb8b8fe14fb49e4f4942116dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSetup: 0
+  isInit: 0
+  isActive: 0
+  activeStates: 
+  listeners: []
 --- !u!1 &8648330541988801497
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,6 +228,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde7d944f922ec941955fb093d4a0297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSetup: 0
+  isInit: 0
+  isActive: 0
+  activeStates: 02000000
+  listeners: []
   data: {fileID: 0}
   pool: {fileID: 0}
   xDir: 1

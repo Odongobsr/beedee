@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class AbstractEvent : AbstractScriptableObject
 {
-  public abstract void RunEvent (MonoBehaviour runner = null); 
+  public abstract void RunEvent (MonoBehaviour runner); 
 }
