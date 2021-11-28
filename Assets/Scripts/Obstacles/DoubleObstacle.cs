@@ -5,19 +5,23 @@ using UnityEngine.Assertions;
 
 namespace Bee
 {
-  public class DoubleObstacle : MonoBehaviour
+  public class DoubleObstacle : AbstractGameComponent
   {
     public Rigidbody2D leftObstacle;
     public Rigidbody2D rightObstacle;
 
-    void Awake()
+    public override void CheckAssertions()
     {
+      base.CheckAssertions ();
+
       Assert.IsNotNull (leftObstacle);
       Assert.IsNotNull (rightObstacle);
     }
 
-    void OnEnable()
+    public override void OnEnable()
     {
+      base.OnEnable ();
+
       SetupDoubleObstacle ();
     }
 

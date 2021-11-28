@@ -8,8 +8,12 @@ namespace Bee
 {
   public class StateMachine : MonoBehaviour
   {
+    [Header ("Configuration")]
     public bool active;
     public bool paused;
+    public float time;
+
+    [Header ("References")]
     Dictionary<State, List<StateListener>> listenerDict = new Dictionary<State, List<StateListener>> ();
     public AbstractState currentState;
     // public List<AbstractState> states = new List<AbstractState> ();
@@ -29,14 +33,18 @@ namespace Bee
       // Logger.Log ($"Add state listener to {state} - {listener.name}", listener);
     }
 
-    public void RemoveListener (StateListener listener, State state)
+    public void  RemoveListener (StateListener listener, State state)
     {
       if (listenerDict.ContainsKey (state))
       {
         if (listenerDict [state].Contains (item: listener))
         {
           listenerDict [state].Remove (item: listener);
-          Logger.Log ($"Remove state listener from {state} - {listener.name}", listener);
+          Logger.Log (
+            _str: $"Remove state listener from {state} - {listener.name.Important ()}", 
+            _context: listener,
+            _color: GameGlobals.Instance.registry.lightredColor
+          );
         }
       }
     }
@@ -46,12 +54,16 @@ namespace Bee
       GameGlobals.Instance.stateMachine = this;
       active = true;
 
+      // reset time
+      time = 0;
+
       for (int i = 0; i < GameGlobals.Instance.registry.states.Count; i++)
       {
         State state = GameGlobals.Instance.registry.states [i].state;
         listenerDict.Add (key: state, value: new List<StateListener> ());
-        Logger.Log ($"Add state listener key - {state}", null);
+        Logger.Log ($"Add state listener key - {state.ToString ().Important ()}", null);
       }
+
     }
 
     void Start ()
@@ -71,14 +83,14 @@ namespace Bee
       }
     }
 
-    void Initialise()
-    {
-      if (currentState != null && listenerDict.ContainsKey (currentState.state))
-      {
-        Logger.Log($"Initialise {currentState.state}", currentState);
-        currentState.Initialise(listeners: listenerDict [currentState.state]);
-      }
-    }
+    // void Initialise()
+    // {
+    //   if (currentState != null && listenerDict.ContainsKey (currentState.state))
+    //   {
+    //     Logger.Log($"Initialise {currentState.state}", currentState);
+    //     currentState.Initialise(listeners: listenerDict [currentState.state]);
+    //   }
+    // }
 
     void Enter ()
     {
@@ -101,6 +113,9 @@ namespace Bee
         currentState.MyUpdate(listeners: listenerDict [currentState.state]);
         // Logger.Log($"Update {currentState.state}", currentState);
       }
+
+      // update time
+      time += Time.deltaTime;
     }
 
     private void FixedUpdate()
@@ -167,15 +182,15 @@ namespace Bee
 
       currentState = GetState (_newState);
 
-      yield return new WaitForSeconds (currentState.introTime / 2);
+      // yield return new WaitForSeconds (currentState.introTime / 2);
 
       currentState.Setup(listeners: listenerDict [currentState.state]);
 
-      yield return new WaitForEndOfFrame ();
+      // yield return new WaitForEndOfFrame ();
       
-      currentState.Initialise(listeners: listenerDict [currentState.state]);
+      // currentState.Initialise(listeners: listenerDict [currentState.state]);
 
-      yield return new WaitForSeconds (currentState.introTime / 2);
+      yield return new WaitForSeconds (currentState.introTime);
 
       GameGlobals.Instance.registry.SetWorldState (WorldState.Complete);
 

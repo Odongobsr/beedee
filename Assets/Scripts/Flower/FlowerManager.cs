@@ -5,42 +5,49 @@ using UnityEngine.Assertions;
 
 namespace Bee
 {
-  public class FlowerManager : AbstractGameObject
+  public class FlowerManager : AbstractGameComponent
   {
     public static int stepCount;
 
     [Header ("References")]
-    public ObjectPool flowerPool;
     public ObjectSpawner objectSpawner;
 
     [Header ("Runtime only")]
     public Stack<Block> inactiveFlowers = new Stack<Block> ();  
     public Stack<Block> activeFlowers = new Stack<Block> ();  
 
-    void Awake ()
+    public override void CheckAssertions()
     {
-      Assert.IsNotNull (flowerPool.holder);
+      base.CheckAssertions();
+
+      Assert.IsNotNull (objectSpawner);
     }
 
-    public override void Activate ()
+    public override bool Activate ()
     {
-      base.Activate ();
+      if (!base.Activate ()) return false;
 
       // create flower object pool
-      flowerPool.CreateObjects (
+      objectSpawner.objectPool.CreateObjects (
         objects: GameGlobals.Instance.registry.GetFlowerDataObjects (),
         count: GameGlobals.Instance.registry.flowerPoolSize
       );
+
+      return true;
     }
     
-    void Start()
+    public override void Start ()
     {
-      GameGlobals.Instance.gameController.obstacleManager.obstacleSpawner.onSpawnObject += IncrementStepCount;
+      base.Start ();
+      
+      GameGlobals.Instance.gameController.obstacleManager.objectSpawner.onSpawnObject += IncrementStepCount;
     }
 
-    void OnDestroy()
+    public override void OnDestroy()
     {
-      GameGlobals.Instance.gameController.obstacleManager.obstacleSpawner.onSpawnObject -= IncrementStepCount;
+      base.OnDestroy();
+
+      GameGlobals.Instance.gameController.obstacleManager.objectSpawner.onSpawnObject -= IncrementStepCount;
     }
 
     void IncrementStepCount ()

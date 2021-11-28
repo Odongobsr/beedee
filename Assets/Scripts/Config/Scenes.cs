@@ -1,5 +1,8 @@
-public enum Scenes
+namespace Bee
 {
-  MainMenu = 0,
-  Game = 1
+  public enum Scenes
+  {
+    MainMenu = 0,
+    Game = 1
+  }
 }

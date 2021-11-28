@@ -2,14 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 
 namespace Bee
 {
   [RequireComponent(typeof(RectTransform), typeof(CanvasGroup))]
   public class UIScreen : StateListener
   {
+    public bool dontDeactivateOnAwake;
+    public bool dontCenterOnScreen;
     public CanvasGroup canvasGroup;
     public RectTransform rectTransform;
+
+    /// <summary>
+    /// Function called when animation is complete
+    /// </summary>
+    UnityAction onCompleteAction;
 
     public override void CheckAssertions()
     {
@@ -31,13 +39,22 @@ namespace Bee
       {
         rectTransform = GetComponent<RectTransform> ();
       }
+
+      // hide
+      if (!dontDeactivateOnAwake)
+      {
+        Deactivate (0);
+      }
     }
 
     public override bool Enter()
     {
       if (!base.Enter()) return false;
       
-      CenterOnScreen ();
+      if (!dontCenterOnScreen)
+      {
+        CenterOnScreen ();
+      }
 
       return true;
     }
@@ -47,13 +64,15 @@ namespace Bee
       rectTransform.anchoredPosition = Vector3.zero;
     }
 
-    public void Activate (float _time = 1)
+    public void Activate (float _time = 1, UnityAction _onCompleteAction = null)
     {
+      onCompleteAction = _onCompleteAction;
       StartCoroutine (FadeCoroutine (_finalAlpha: 1, _time: _time));
     }
 
-    public void Deactivate (float _time = 1)
+    public void Deactivate (float _time = 1, UnityAction _onCompleteAction = null)
     {
+      onCompleteAction = _onCompleteAction;
       StartCoroutine (FadeCoroutine (_finalAlpha: 0, _time: _time));
     }
     
@@ -90,6 +109,8 @@ namespace Bee
       {
         EnableInteractivity();
       }
+
+      onCompleteAction?.Invoke ();
     }
 
     void EnableInteractivity()

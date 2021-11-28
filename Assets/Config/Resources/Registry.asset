@@ -25,6 +25,10 @@ MonoBehaviour:
   defaultFadeTime: 0
   groundLightenValue: -0.1
   groundLightenTime: 2
+  userDataKey: bee_userData
+  playerPrefsReader: {fileID: 11400000, guid: c9cf1a7e6b140be4db69b6853baafa42, type: 2}
+  userDataReader: {fileID: 11400000, guid: b5ccb6d137e8e8b45a681141b559e97c, type: 2}
+  rosettaReader: {fileID: 11400000, guid: 2db4cc1fde8b6eb47bc8c6493d9ac5fe, type: 2}
   states:
   - {fileID: 11400000, guid: 8222bca8b29bee14e992c29df6067445, type: 2}
   - {fileID: 11400000, guid: aeb60b42714117445a7cae281c1197c3, type: 2}
@@ -54,5 +58,8 @@ MonoBehaviour:
   obstacleTag: Obstacle
   flowerTag: Flower
   playerTag: Player
+  orange: {r: 0.96862745, g: 0.5803922, b: 0.11372549, a: 1}
+  lightred: {r: 0.91764706, g: 0.34901962, b: 0.34901962, a: 1}
+  togglePrefab: {fileID: 5682761403948833194, guid: 86df785dea410e6449ea400c27a3985a, type: 3}
   styles:
   - {fileID: 11400000, guid: 95c6adc016c26994fad1b4271dd7ae43, type: 2}

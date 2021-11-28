@@ -15,19 +15,20 @@ namespace Bee
     public float exitTime;
     protected StateMachine stateMachine;
 
-    public virtual void Initialise (List<StateListener> listeners) 
-    {
-      for (int l = 0; l < listeners.Count; l++)
-      {
-        listeners [l].Initialise ();
-      }
+    // public virtual void Initialise (List<StateListener> listeners) 
+    // {
+    //   for (int l = 0; l < listeners.Count; l++)
+    //   {
+    //     listeners [l].Initialise ();
+    //   }
       
-      Logger.Log(
-        _str: $"Initialise state {state}", 
-        _context: this,
-        _color: Color.magenta.ToString ()
-      );
-    }
+    //   Logger.Log(
+    //     _str: $"Initialise state {state}", 
+    //     _context: this,
+    //     _color: Color.brown.ToString ()
+    //   );
+    // }
+
     public virtual void Setup (List<StateListener> listeners) 
     {
       for (int l = 0; l < listeners.Count; l++)
@@ -35,10 +36,11 @@ namespace Bee
         listeners [l].Setup ();
       }
 
-      Logger.Log(
-        _str: $"Setup state {state}", 
+      Logger.LogList (
+        _title: $"---- Setup state {state.ToString ().Important ()}", 
+        _message: listeners.PrintMe (),
         _context: this,
-        _color: Color.magenta.ToString ()
+        _color: GameGlobals.Instance.registry.orangeColor
       );
     }
     
@@ -64,10 +66,11 @@ namespace Bee
       {
         listeners [l].Enter ();
       }
-      Logger.Log(
-        _str: $"Enter state {state}", 
+      Logger.LogList(
+        _title: $"---- Enter state {state.ToString ().Important ()}", 
+        _message: listeners.PrintMe (),
         _context: this,
-        _color: Color.magenta.ToString ()
+        _color: GameGlobals.Instance.registry.orangeColor
       );
     }
 
@@ -77,8 +80,9 @@ namespace Bee
       {
         listeners [l].Exit ();
       }  
-      Logger.Log(
-        _str: $"Exit state {state}", 
+      Logger.LogList (
+        _title: $"---- Exit state {state.ToString ().Important ()}", 
+        _message: listeners.PrintMe (),
         _context: this,
         _color: "red"
       );

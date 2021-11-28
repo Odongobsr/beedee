@@ -24,7 +24,7 @@ namespace Bee
       base.Start ();
 
       alive = true;
-      Logger.Log ($"{name} is alive!", this);
+      // Logger.Log ($"{name} is alive!", this);
     }
 
     public void Die ()

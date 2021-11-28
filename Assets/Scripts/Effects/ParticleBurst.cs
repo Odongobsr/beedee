@@ -17,8 +17,10 @@ namespace Bee
       Assert.IsNotNull (particle);
     }
 
-    void OnEnable ()
+    public override void OnEnable ()
     {
+      base.OnEnable ();
+      
       Emit ();
     }
 

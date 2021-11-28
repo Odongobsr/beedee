@@ -13,8 +13,10 @@ namespace Bee
     /// </summary>
     public ObjectPool pool;
 
-    void OnEnable ()
+    public override void OnEnable ()
     {
+      base.OnEnable ();
+
       if (pool)
       {
         // return to active objects of pool when enabled
@@ -22,8 +24,10 @@ namespace Bee
       }
     }
 
-    void OnDisable ()
+    public override void OnDisable ()
     {
+      base.OnDisable ();
+      
       if (pool)
       {
         // return to inactive objects of pool when disabled

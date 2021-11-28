@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Bee
 {
@@ -24,8 +27,10 @@ namespace Bee
     [Header ("Runtime Only")]
     public List<AbstractPoolable> objects;
 
-    void Awake ()
+    public override void CheckAssertions ()
     {
+      base.CheckAssertions ();
+
       Assert.IsNotNull (objectPool);
     }
 

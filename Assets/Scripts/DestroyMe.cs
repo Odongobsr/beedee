@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DestroyMe : MonoBehaviour
 {
-  public void Destroy ()
+  public void Awake ()
   {
     Destroy (gameObject);
   }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Bee
 {
@@ -11,7 +12,14 @@ namespace Bee
   public class CutsceneFrame : AbstractScriptableObject
   {
     public Sprite sprite;
-    [TextArea (3, 10)]
-    public string text;
+    public RosettaKey text;
+
+    public override void CheckAssertions()
+    {
+      base.CheckAssertions();
+
+      Assert.IsNotNull (sprite);
+      Assert.IsTrue (text != RosettaKey.NULL);
+    }
   }
 }

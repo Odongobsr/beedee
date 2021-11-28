@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 
 namespace Bee
 {
-  public class GameController : StateListener
+  public class GameController : SceneController
   {
     public bool gameStarted;
 
@@ -18,27 +18,29 @@ namespace Bee
     {
       base.Awake ();
 
-      Assert.IsNotNull (obstacleManager);    
-      Assert.IsNotNull (flowerManager);    
-      Assert.IsNotNull (switchToMainMenu);    
       GameGlobals.Instance.gameController = this;
     }
 
-    public override void Start ()
+
+    public override void CheckAssertions ()
     {
-      base.Start ();
+      base.CheckAssertions ();
+
+      Assert.IsNotNull (obstacleManager);    
+      Assert.IsNotNull (flowerManager);    
+      Assert.IsNotNull (switchToMainMenu);     
+    }
+    
+    public override bool Activate ()
+    {
+      if (!base.Activate ()) return false;
 
       GameGlobals.Instance.playerButtonsUIScreen.Deactivate (0);
-    }
-
-    public override bool Enter ()
-    {
-      if (!base.Enter ()) return false;
-
       StartCoroutine (StartGameCoroutine ());
 
       return true;
     }
+
 
     public override void MyUpdate()
     {
@@ -50,10 +52,12 @@ namespace Bee
       }
     }
 
-    void OnEnable ()
+    public override void OnEnable()
     {
-      Logger.LogDivider ();
-      Logger.Log ("Enable game controller");
+      base.OnEnable();
+
+      // Logger.LogDivider ();
+      // Logger.Log ("Enable game controller");
     }
 
     IEnumerator StartGameCoroutine ()
@@ -62,8 +66,8 @@ namespace Bee
 
       // GameGlobals.Instance.registry.UnPause ();
       gameStarted = true;
-      flowerManager.Activate ();
-      obstacleManager.Activate ();
+      // flowerManager.Activate ();
+      // obstacleManager.Activate ();
 
       int introTime = GameGlobals.Instance.registry.introTime;
 

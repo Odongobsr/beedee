@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Bee
 {
@@ -10,6 +11,13 @@ namespace Bee
     public Transform holder;
     public List<AbstractPoolable> inactiveObjects; // = new Stack<GameObject> ();  
     public List<AbstractPoolable> activeObjects; // = new Stack<GameObject> ();  
+
+    public override void CheckAssertions()
+    {
+      base.CheckAssertions();
+
+      Assert.IsNotNull (holder);
+    }
 
     public void CreateObjects (List<DataObject> objects, int count)
     {

@@ -5,36 +5,38 @@ using UnityEngine.Assertions;
 
 namespace Bee
 {
-  public class ObstacleManager : AbstractGameObject
+  public class ObstacleManager : AbstractGameComponent
   {
     [Header ("References")]
-    public ObjectPool obstaclePool;
-    public ObjectSpawner obstacleSpawner;
+    public ObjectSpawner objectSpawner;
 
     [Header ("Runtime only")]
     public Stack<Block> inactiveObstacles = new Stack<Block> ();  
     public Stack<Block> activeObstacles = new Stack<Block> ();  
 
-    void Awake ()
+    public override void CheckAssertions ()
     {
-      Assert.IsNotNull (obstaclePool.holder);
-      Assert.IsNotNull (obstacleSpawner);
+      base.CheckAssertions ();
+
+      Assert.IsNotNull (objectSpawner);
     }
 
-    public override void Activate ()
+    public override bool Activate ()
     {
-      base.Activate ();
+      if (!base.Activate ()) return false;
 
       // create obstacle object pool
-      obstaclePool.CreateObjects (
+       objectSpawner.objectPool.CreateObjects (
         objects: GameGlobals.Instance.registry.GetObstacleDataObjects (),
         count: GameGlobals.Instance.registry.obstaclePoolSize
       );
+
+      return true;
     }
 
     public void StartSpawningObstacles ()
     {
-      obstacleSpawner.StartSpawningObjects (wait: GameGlobals.Instance.registry.obstacleWaitTime);
+      objectSpawner.StartSpawningObjects (wait: GameGlobals.Instance.registry.obstacleWaitTime);
     }
   }
 }

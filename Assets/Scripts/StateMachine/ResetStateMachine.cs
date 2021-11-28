@@ -15,8 +15,10 @@ namespace Bee
 
     void Start ()
     {
+      Logger.LogDivider ();
+
       Logger.Log (
-        $"Reset state machine to {initialState}",
+        $"Reset state machine to {initialState.ToString ().Important ()}",
         this
       );
       GameGlobals.Instance.stateMachine.ChangeState (initialState);

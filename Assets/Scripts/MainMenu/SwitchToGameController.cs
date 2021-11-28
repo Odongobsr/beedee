@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 
 namespace Bee
 {
-  public class SwitchToGameController : MonoBehaviour
+  public class SwitchToGameController : AbstractGameComponent
   {
     [Header ("References")]
     public GameObject switcher;
@@ -15,21 +15,25 @@ namespace Bee
     [Header ("Runtime only")]
     public bool switchingToGameScene;
 
-    void Awake()
+    public override void CheckAssertions()
     {
+      base.CheckAssertions ();
+
       Assert.IsNotNull (switcher);    
       Assert.IsNotNull (audioSource);    
       Assert.IsNotNull (audioSource.clip);    
     }
 
-    void Start()
+    public override void Start()
     {
+      base.Start ();
+
       switcher.gameObject.SetActive (false);
     }
 
     void Update()
     {
-      if (!switchingToGameScene)
+      if (active && !switchingToGameScene)
       {
         // detect user input
         if (Input.GetMouseButtonDown (0) || Input.GetKeyDown (KeyCode.Space))    

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Bee
 {
@@ -11,6 +12,13 @@ namespace Bee
   public class DataObject : AbstractScriptableObject
   {
     public AbstractPoolable prefab;
+
+    public override void CheckAssertions()
+    {
+      base.CheckAssertions();
+
+      Assert.IsNotNull (prefab);
+    }
 
     [ContextMenu ("Assign data to prefab")]
     public override void OnValidate()

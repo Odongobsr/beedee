@@ -5,19 +5,30 @@ using UnityEngine.Assertions;
 
 namespace Bee
 {
-  public class PlayerCollisionDetector : MonoBehaviour
+  public class PlayerCollisionDetector : AbstractGameComponent
   {
+    [Header ("References")]
+    /// <summary>
+    /// Shown when player collides with an obstacle
+    /// </summary>
     public GameObject bump;
     public Player player;
     public AudioSource flowerSound;
     public AudioSource obstacleSound;
 
-    void Awake ()
+    public override void CheckAssertions ()
     {
+      base.CheckAssertions ();
+
       Assert.IsNotNull (player);
       Assert.IsNotNull (flowerSound);
       Assert.IsNotNull (obstacleSound);
       Assert.IsNotNull (bump);
+    }
+
+    public override void Awake()
+    {
+      base.Awake();
 
       HideBump ();
     }

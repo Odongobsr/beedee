@@ -45,6 +45,12 @@ namespace Bee
     [Range (0, 5)]
     public float groundLightenTime;
 
+    [Header ("Data")]
+    [ReadOnly] public string userDataKey = "bee_userData";
+    public PlayerPrefsReader playerPrefsReader;
+    public UserDataReader userDataReader;
+    public RosettaReader rosettaReader;
+
     [Header ("States")]
     public List<AbstractState> states;
 
@@ -66,6 +72,7 @@ namespace Bee
     [Range (0, 5)]
     public float doubleObstacleXOffset;
     public List<BlockData> obstacleDataList = new List<BlockData> ();
+
     [Header ("Flowers")]
     [Range (1, 40)]
     public int flowerInterval;  
@@ -84,38 +91,79 @@ namespace Bee
     public string playerTag;
 
     [Header ("UI")]
+    [HideInInspector] internal string orangeColor = "#FFAA00";
+    [HideInInspector] internal string lightredColor = "#f9615d";
+    public UIToggle togglePrefab;
     public List<StyleAsset> styles;
+
+// #if UNITY_EDITOR
+    public void CheckGameComponents ()
+    {
+      if (!Application.isPlaying)
+      {
+        List<AbstractGameComponent> gameObjects = 
+          new List<AbstractGameComponent> (GameObject.FindObjectsOfType<AbstractGameComponent> ());
+
+        Logger.LogList (
+          _title: $"Checking {gameObjects.Count} game components:",
+          _message: $"{gameObjects.PrintMe ()}",
+          null
+        );
+
+        for (int i = 0; i < gameObjects.Count; i++)
+        {
+          gameObjects [i].CheckAssertions ();
+        }
+      }
+    }
+// #endif
     
     void Awake ()
     {
     }
 
-    public void Setup ()
+    public override void Setup ()
     {
-      Assert.IsTrue (obstacleDataList.Count > 0, "No obstacle data");
-      Assert.IsTrue (styles.Count > 0, "No UI styles");
-      Assert.IsTrue (states.Count > 0, "No states");
+      base.Setup ();
+      
+      Logger.LogBegin ("Setup registry");
 
-      for (int i = 0; i < obstacleDataList.Count; i++)
-      {
-        Assert.IsNotNull (obstacleDataList [i]);
-      }
+      // check assertions
+      Assert.IsNotNull (playerPrefsReader);
+      playerPrefsReader.CheckAssertions ();
+      Assert.IsNotNull (userDataReader);
+      userDataReader.CheckAssertions ();
+      Assert.IsNotNull (rosettaReader);
+      rosettaReader.CheckAssertions ();
+
+      Assert.IsTrue (obstacleDataList.Count > 0);
+      Assert.IsFalse (obstacleDataList.HasNull ());
+      Assert.IsTrue (styles.Count > 0);
+      Assert.IsFalse (styles.HasNull ());
+      Assert.IsTrue (states.Count > 0);
+      Assert.IsFalse (states.HasNull ());
 
       Assert.IsNotNull (obstacleWaitTime);
+      Assert.IsNotNull (togglePrefab);
 
-      Logger.Log ("Setup registry");
+      // check game components in scene
+      CheckGameComponents ();
+
+      // load user data
+      userDataReader.LoadUserData ();
+
+      // load language file
+      rosettaReader.Load ();
+
+      // update language
+      rosettaReader.UpdateLanguage ();
+
+      Logger.LogEnd ("Setup registry");
     }
 
     public float GetGlobalSpeed ()
     {
-      // if (paused)
-      // {
-      //   return 0;
-      // }
-      // else
-      // {
         return globalSpeedMultiplier;
-      // }
     }
 
     public List<DataObject> GetObstacleDataObjects ()

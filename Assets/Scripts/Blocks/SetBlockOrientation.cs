@@ -5,12 +5,14 @@ using UnityEngine.Assertions;
 
 namespace Bee
 {
-  public class SetBlockOrientation : MonoBehaviour
+  public class SetBlockOrientation : AbstractGameComponent
   {
     public Block block;
 
-    void OnEnable()
+    public override void OnEnable ()
     {
+      base.OnEnable ();
+
       Assert.IsNotNull (block);
 
       if (block && block.data)   

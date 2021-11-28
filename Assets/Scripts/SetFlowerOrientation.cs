@@ -5,15 +5,24 @@ using UnityEngine.Assertions;
 
 namespace Bee
 {
-  public class SetFlowerOrientation : MonoBehaviour
+  public class SetFlowerOrientation : AbstractGameComponent
   {
+    [Header ("References")]
     public Orientation orientation;
     public Flower flower;
 
-    void OnEnable()
+    public override void CheckAssertions()
     {
-      Assert.IsNotNull (flower);
+      base.CheckAssertions();
 
+      Assert.IsNotNull (flower);
+    }
+
+    public override void OnEnable()
+    {
+      base.OnEnable ();
+
+      // set orientation to random value
       float r = Random.value;
       if (r < 0.5f)
       {

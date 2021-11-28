@@ -128,7 +128,7 @@ public static class ListExtensionMethods
   {
     if (list.Count <= 0)
     {
-      return Environment.NewLine;
+      return "NULL";
     }
 
     sb.Clear ();

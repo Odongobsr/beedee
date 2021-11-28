@@ -35,9 +35,24 @@ namespace Bee
 
       Assert.IsTrue (frames.Count > 0);
       Assert.IsFalse (frames.HasNull ());
-
     }
 
+    void Update()
+    {
+      if (isPlaying)
+      {
+        // detect user input
+        if (Input.GetMouseButtonDown (0) || Input.GetKeyDown (KeyCode.Space))    
+        {
+          StopCutscene ();
+        }
+      }
+    }
+
+    /// <summary>
+    /// Start cutscene
+    /// <param name="_onCompleteAction">Function that is called when cutscene is complete</param>
+    /// </summary>
     public void StartCutscene (UnityAction _onCompleteAction)
     {
       onCompleteAction = _onCompleteAction;
@@ -47,7 +62,7 @@ namespace Bee
     IEnumerator CutsceneCoroutine ()
     {
       Logger.Log (
-        $"Start {name}",
+        $"Start {name.Important ()}",
         this
       );
 
@@ -58,7 +73,12 @@ namespace Bee
       {
         // show next frame
         image.sprite = frames [index].sprite;
-        text.text = frames [index].text;
+        text.text = GameGlobals.Instance.registry.rosettaReader.GetKey (frames [index].text);
+
+        Logger.Log (
+          $"{image.sprite.name} - {text.text}",
+          image.sprite
+        );
       
         UIScreen.Activate ();
 

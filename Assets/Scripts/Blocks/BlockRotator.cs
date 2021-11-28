@@ -12,8 +12,10 @@ namespace Bee
     public int dir;
     public Transform target;
 
-    void OnEnable ()
+    public override void OnEnable ()
     {
+      base.OnEnable ();
+      
       rotate = Random.value < rotateChance ? true : false;
 
       if (!rotate)

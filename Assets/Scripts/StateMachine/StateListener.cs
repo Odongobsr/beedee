@@ -6,26 +6,23 @@ using UnityEngine.Assertions;
 namespace Bee
 {
   [System.Serializable]
-  public class StateListener : MonoBehaviour
+  public class StateListener : AbstractGameComponent
   {
     [Header ("State")]
     public bool isSetup;
-    public bool isInit;
+    // public bool isSetup;
     public bool isActive;
 
     public List<State> activeStates;
     public List<StateListener> listeners;
 
-    public virtual void CheckAssertions ()
-    {
-
-    }
-
     /// <summary>
     /// if state listener needs to set isSetup state it should do so here
     /// </summary>
-    public virtual void Awake ()
+    public override void Awake ()
     {
+      base.Awake ();
+
       if (null != transform.parent)
       {
         StateListener parentListener = transform.parent.GetComponent<StateListener> ();
@@ -39,8 +36,10 @@ namespace Bee
       }
     }
 
-    public virtual void Start ()
+    public override void Start ()
     {
+      base.Start ();
+
       if (null == transform.parent || null == transform.parent.GetComponent<StateListener> ())
       {
       // if (GameGlobals.Instance.stateMachine.active)
@@ -57,13 +56,13 @@ namespace Bee
         {
           case WorldState.SettingUp:
             Setup ();
-            Initialise ();
+            // Initialise ();
             break;
 
           case WorldState.Complete:
           case WorldState.Retired:
             Setup ();
-            Initialise ();
+            // Initialise ();
             // enter if game world is already set up
             Enter ();
             break;
@@ -71,8 +70,10 @@ namespace Bee
       }
     }
 
-    public virtual void OnDestroy()
+    public override void OnDestroy()
     {
+      base.OnDestroy ();
+
       for (int s = 0; s < activeStates.Count; s++)
       {
         GameGlobals.Instance.stateMachine.RemoveListener (listener: this, state: activeStates[s]);
@@ -108,25 +109,25 @@ namespace Bee
       return true;
     }
 
-    public virtual bool Initialise ()
-    {
-      if (isInit)
-      {
-        // Logger.Log ($"{name} is already initialised", this);
-        return false;
-      }
+    // public virtual bool Initialise ()
+    // {
+    //   if (isSetup)
+    //   {
+    //     // Logger.Log ($"{name} is already initialised", this);
+    //     return false;
+    //   }
       
-      isInit = true;
+    //   isSetup = true;
 
-      // Logger.Log ($"Initialise {name}", this);
-      // initalise listeners
-      for (int a = 0; a < listeners.Count; a++)
-      {
-        listeners [a].Initialise ();
-      }
+    //   // Logger.Log ($"Initialise {name}", this);
+    //   // initalise listeners
+    //   for (int a = 0; a < listeners.Count; a++)
+    //   {
+    //     listeners [a].Initialise ();
+    //   }
 
-      return true;
-    }
+    //   return true;
+    // }
     
     public virtual void Pause ()
     {
@@ -164,9 +165,11 @@ namespace Bee
       
       if (!activeStates.Contains (GameGlobals.Instance.stateMachine.currentState.state))
       {
-        Logger.LogWarningList (
-          _title: $"{name} - State machine is not in active state: {GameGlobals.Instance.stateMachine.currentState.state}",
-          _message: activeStates.PrintMe (),
+        string currentState = GameGlobals.Instance.stateMachine.currentState.state.ToString ().Important ();
+
+        Logger.LogList (
+          _title: $"{name.Important ()} - tate machine is not in active state: {currentState}",
+          _message: $"Active states: {activeStates.PrintMe ()}",
           this
         );
         return false;
@@ -187,7 +190,7 @@ namespace Bee
     {
       isActive = false;
       isSetup = false;
-      isInit = false;
+      isSetup = false;
       
       // initalise listeners
       for (int a = 0; a < listeners.Count; a++)
@@ -198,7 +201,7 @@ namespace Bee
 
     public virtual void MyUpdate ()
     {
-      if (!isInit)
+      if (!isSetup)
       {
         return;
       }
@@ -210,7 +213,7 @@ namespace Bee
     
     public virtual void MyFixedUpdate ()
     {
-      if (!isInit)
+      if (!isSetup)
       {
         return;
       }
@@ -222,7 +225,7 @@ namespace Bee
     
     public virtual void MyLateUpdate()
     {
-      if (!isInit)
+      if (!isSetup)
       {
         return;
       }
@@ -234,7 +237,7 @@ namespace Bee
 
     public virtual void MyOnTriggerEnter2D (Collider2D other)
     {
-      if (!isInit)
+      if (!isSetup)
       {
         return;
       }
@@ -246,7 +249,7 @@ namespace Bee
 
     public virtual void MyOnTriggerExit2D(Collider2D other) 
     {
-      if (!isInit)
+      if (!isSetup)
       {
         return;
       }
@@ -258,7 +261,7 @@ namespace Bee
 
     public virtual void MyOnCollisionEnter2D (Collision2D collision)
     {
-      if (!isInit)
+      if (!isSetup)
       {
         return;
       }
@@ -270,7 +273,7 @@ namespace Bee
 
     public virtual void MyOnCollisionExit2D(Collision2D collision) 
     {
-      if (!isInit)
+      if (!isSetup)
       {
         return;
       }
