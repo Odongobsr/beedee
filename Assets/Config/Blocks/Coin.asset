@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fd9673b8a7eebc43a0f58175063b2fb, type: 3}
-  m_Name: Obstacle wall
+  m_Name: Coin
   m_EditorClassIdentifier: 
   me: {fileID: 11400000}
-  prefab: {fileID: 7934810861824507664, guid: 8c7ab16510be63144aad4388984d0cb3, type: 3}
-  orientation: 0
+  prefab: {fileID: 8189986803993624630, guid: 62b9353d35b02af428b5bb85e3970663, type: 3}
+  orientation: 2
   rotateToOrientation: 0

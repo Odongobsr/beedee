@@ -16,22 +16,33 @@ namespace Bee
     /// How long to wait before spawning another object?
     /// </summary>
     public FloatVariable waitTime;
+    public ObjectPattern objectPattern;
 
 
     [Header ("References")]
+    public ObjectPatternGenerator objectPatternGenerator;
     public ObjectPool objectPool;
 
     public delegate void OnSpawnObject();
     public OnSpawnObject onSpawnObject;
 
     [Header ("Runtime Only")]
-    public List<AbstractPoolable> objects;
+    // public List<AbstractPoolable> objects;
+    /// <summary>
+    /// Index of current object pattern
+    /// </summary>
+    public int patternIndex;
+    /// <summary>
+    /// How many objects in current pattern?
+    /// </summary>
+    public int patternCount;
 
     public override void CheckAssertions ()
     {
       base.CheckAssertions ();
 
       Assert.IsNotNull (objectPool);
+      Assert.IsNotNull (objectPatternGenerator);
     }
 
     public void StartSpawningObjects (FloatVariable wait)
@@ -46,10 +57,26 @@ namespace Bee
 
       while (true)
       {
+        if (patternIndex >= objectPattern.objects.Count)
+        {
+          RegeneratePattern ();
+        }
+
         SpawnObject ();
 
         yield return new WaitForSeconds (waitTime.value);
       }
+    }
+
+    [ContextMenu ("Regenerate Pattern")]
+    void RegeneratePattern ()
+    {
+      objectPattern = objectPatternGenerator.GeneratePattern ();
+      patternIndex = 0;
+      // Logger.Log (
+      //   $"Regenerate pattern: {objectPattern.objects.Count}",
+      //   this
+      // );
     }
 
     public AbstractPoolable SpawnObject (Transform parent = null)
@@ -65,7 +92,7 @@ namespace Bee
         return null;
       }
 
-      AbstractPoolable obj = objectPool.GetInactiveObject (random: true);
+      AbstractPoolable obj = objectPool.GetInactiveObject (objectPattern.objects [patternIndex]);
 
       if (null == obj)
       {
@@ -82,9 +109,12 @@ namespace Bee
       obj.gameObject.SetActive (true);
       onSpawnObject?.Invoke ();
 
-      objects.Add (obj);
+      // objects.Add (obj);
 
-      // Logger.Log ($"Spawn object {obj.name}", obj);
+      Logger.Log ($"Spawn object {obj.name}", obj);
+
+      patternIndex++;
+
       return obj;
     }
   }

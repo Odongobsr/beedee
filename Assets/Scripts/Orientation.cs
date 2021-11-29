@@ -6,6 +6,7 @@ public enum Orientation
 {
   Left = -1,
   Center = 0,
-  Right = 1
+  Right = 1,
+  Random = 2
 
 }

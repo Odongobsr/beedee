@@ -71,14 +71,12 @@ namespace Bee
     public float doubleObstacleGapMax;
     [Range (0, 5)]
     public float doubleObstacleXOffset;
-    public List<BlockData> obstacleDataList = new List<BlockData> ();
 
     [Header ("Flowers")]
     [Range (1, 40)]
     public int flowerInterval;  
     [Range (1, 20)]
     public int flowerPoolSize;  
-    public List<BlockData> flowerDataList = new List<BlockData> ();
 
     [Header ("References")]
     public List<BlockData> blocks = new List<BlockData> ();
@@ -87,6 +85,7 @@ namespace Bee
 
     [Header ("Tags")]
     public string obstacleTag;
+    public string coinTag;
     public string flowerTag;
     public string playerTag;
 
@@ -99,21 +98,18 @@ namespace Bee
 // #if UNITY_EDITOR
     public void CheckGameComponents ()
     {
-      if (!Application.isPlaying)
+      List<AbstractGameComponent> gameObjects = 
+        new List<AbstractGameComponent> (GameObject.FindObjectsOfType<AbstractGameComponent> ());
+
+      Logger.LogList (
+        _title: $"Checking {gameObjects.Count} game components:",
+        _message: $"{gameObjects.PrintMe ()}",
+        null
+      );
+
+      for (int i = 0; i < gameObjects.Count; i++)
       {
-        List<AbstractGameComponent> gameObjects = 
-          new List<AbstractGameComponent> (GameObject.FindObjectsOfType<AbstractGameComponent> ());
-
-        Logger.LogList (
-          _title: $"Checking {gameObjects.Count} game components:",
-          _message: $"{gameObjects.PrintMe ()}",
-          null
-        );
-
-        for (int i = 0; i < gameObjects.Count; i++)
-        {
-          gameObjects [i].CheckAssertions ();
-        }
+        gameObjects [i].CheckAssertions ();
       }
     }
 // #endif
@@ -136,8 +132,6 @@ namespace Bee
       Assert.IsNotNull (rosettaReader);
       rosettaReader.CheckAssertions ();
 
-      Assert.IsTrue (obstacleDataList.Count > 0);
-      Assert.IsFalse (obstacleDataList.HasNull ());
       Assert.IsTrue (styles.Count > 0);
       Assert.IsFalse (styles.HasNull ());
       Assert.IsTrue (states.Count > 0);
@@ -164,32 +158,6 @@ namespace Bee
     public float GetGlobalSpeed ()
     {
         return globalSpeedMultiplier;
-    }
-
-    public List<DataObject> GetObstacleDataObjects ()
-    {
-      List<DataObject> obstacles = new List<DataObject> ();
-      for (int i = 0; i < obstacleDataList.Count; i++)
-      {
-        DataObject obj = obstacleDataList [i];
-        // obj.name = obstacleDataList [i].name;
-        obstacles.Add (obj);
-      }
-
-      return obstacles;
-    }
-
-    public List<DataObject> GetFlowerDataObjects ()
-    {
-      List<DataObject> flowers = new List<DataObject> ();
-      for (int i = 0; i < flowerDataList.Count; i++)
-      {
-        DataObject obj = flowerDataList [i];
-        // obj.name = obstacleDataList [i].name;
-        flowers.Add (obj);
-      }
-
-      return flowers;
     }
 
     public AbstractState GetState(State _state)

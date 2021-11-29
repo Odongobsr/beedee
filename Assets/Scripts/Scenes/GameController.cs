@@ -7,11 +7,8 @@ namespace Bee
 {
   public class GameController : SceneController
   {
-    public bool gameStarted;
-
     [Header ("References")]
     public ObstacleManager obstacleManager;
-    public FlowerManager flowerManager;
     public Event_SwitchScene switchToMainMenu;
 
     public override void Awake()
@@ -27,7 +24,6 @@ namespace Bee
       base.CheckAssertions ();
 
       Assert.IsNotNull (obstacleManager);    
-      Assert.IsNotNull (flowerManager);    
       Assert.IsNotNull (switchToMainMenu);     
     }
     
@@ -63,11 +59,6 @@ namespace Bee
     IEnumerator StartGameCoroutine ()
     {
       GameGlobals.Instance.playerButtonsUIScreen.Activate ();
-
-      // GameGlobals.Instance.registry.UnPause ();
-      gameStarted = true;
-      // flowerManager.Activate ();
-      // obstacleManager.Activate ();
 
       int introTime = GameGlobals.Instance.registry.introTime;
 

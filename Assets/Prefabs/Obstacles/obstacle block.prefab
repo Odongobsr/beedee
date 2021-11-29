@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07e7c7be527f7844284d5c2b64b763ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 0
+  isSetup: 0
+  isActive: 0
+  activeStates: 
+  listeners: []
   speed: 1
   bounce: 1
 --- !u!1001 &585473811161388805
@@ -25,6 +30,10 @@ PrefabInstance:
       propertyPath: data
       value: 
       objectReference: {fileID: 11400000, guid: c3e7146e250d1354eabcc108b8a21021, type: 2}
+    - target: {fileID: 8648330541988801502, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8648330543369230617, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -72,6 +81,10 @@ PrefabInstance:
     - target: {fileID: 8648330543369230618, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
       propertyPath: m_Name
       value: obstacle block
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648330543369230619, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6b19c049f0091440938d6da7cc4e6a8, type: 3}

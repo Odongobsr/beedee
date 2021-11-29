@@ -14,6 +14,7 @@ namespace Bee
     public GameObject bump;
     public Player player;
     public AudioSource flowerSound;
+    public AudioSource coinSound;
     public AudioSource obstacleSound;
 
     public override void CheckAssertions ()
@@ -22,6 +23,7 @@ namespace Bee
 
       Assert.IsNotNull (player);
       Assert.IsNotNull (flowerSound);
+      Assert.IsNotNull (coinSound);
       Assert.IsNotNull (obstacleSound);
       Assert.IsNotNull (bump);
     }
@@ -66,7 +68,17 @@ namespace Bee
             _time: GameGlobals.Instance.registry.groundLightenTime
           );
         }
-        Logger.Log ($"Player has hit {other.attachedRigidbody.tag} - {other.attachedRigidbody.name}", other.attachedRigidbody);
+        else if (other.CompareTag (GameGlobals.Instance.registry.coinTag))
+        {
+          other.gameObject.SetActive (false);
+          coinSound.Play ();
+        }
+
+        if (!other.CompareTag ("Untagged"))
+        {
+          Logger.Log ($"Player has hit {other.attachedRigidbody.tag} - {other.attachedRigidbody.name}", other.attachedRigidbody);
+        }
+
       }
     }
 

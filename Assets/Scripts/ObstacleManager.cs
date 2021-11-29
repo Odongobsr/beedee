@@ -5,8 +5,11 @@ using UnityEngine.Assertions;
 
 namespace Bee
 {
-  public class ObstacleManager : AbstractGameComponent
+  public class ObstacleManager : StateListener
   {
+    [Header ("Configuration")]
+    public ObjectPatternGenerator objectPatternGenerator;
+
     [Header ("References")]
     public ObjectSpawner objectSpawner;
 
@@ -21,15 +24,12 @@ namespace Bee
       Assert.IsNotNull (objectSpawner);
     }
 
-    public override bool Activate ()
+    public override bool Enter ()
     {
-      if (!base.Activate ()) return false;
+      if (!base.Enter ()) return false;
 
       // create obstacle object pool
-       objectSpawner.objectPool.CreateObjects (
-        objects: GameGlobals.Instance.registry.GetObstacleDataObjects (),
-        count: GameGlobals.Instance.registry.obstaclePoolSize
-      );
+       objectSpawner.objectPool.CreateObjects ();
 
       return true;
     }

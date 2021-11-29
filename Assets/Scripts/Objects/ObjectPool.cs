@@ -8,6 +8,7 @@ namespace Bee
   [System.Serializable]
   public class ObjectPool : AbstractGameComponent
   {
+    public List<BlockCollection> blockCollections;
     public Transform holder;
     public List<AbstractPoolable> inactiveObjects; // = new Stack<GameObject> ();  
     public List<AbstractPoolable> activeObjects; // = new Stack<GameObject> ();  
@@ -19,7 +20,7 @@ namespace Bee
       Assert.IsNotNull (holder);
     }
 
-    public void CreateObjects (List<DataObject> objects, int count)
+    public void CreateObjects ()
     {
       if (null == holder)
       {
@@ -27,53 +28,46 @@ namespace Bee
         return;
       }
 
-      for (int i = 0; i < objects.Count; i++)
+      for (int k = 0; k < blockCollections.Count; k++)
       {
-        for (int j = 0; j < count; j++)
+        BlockCollection blockCollection = blockCollections [k];
+        int count = blockCollection.count;
+
+        for (int i = 0; i < blockCollection.blocks.Count; i++)
         {
-          if (null == objects [i])
+          for (int j = 0; j < count; j++)
           {
-            Logger.LogWarning ($"Object is null at index {i}");
-            continue;
+            if (null == blockCollection.blocks [i])
+            {
+              Logger.LogWarning ($"Object is null at index {i}");
+              continue;
+            }
+
+            AbstractPoolable obj = Instantiate (
+              original: blockCollection.blocks [i].prefab,
+              position: Vector3.zero,
+              rotation: blockCollection.blocks [i].prefab.transform.rotation,
+              parent:holder
+            );
+          
+            obj.data = blockCollection.blocks [i];
+
+            string name = blockCollection.blocks [i].name;
+
+            obj.name = $"{name}_{j}";
+            obj.pool = this;
+
+            obj.gameObject.SetActive (false);
           }
-
-          // deactivate prefab?
-          // objects [i].prefab.gameObject.SetActive (false);
-
-          AbstractPoolable obj = Instantiate (
-            original: objects [i].prefab,
-            position: Vector3.zero,
-            rotation: objects [i].prefab.transform.rotation,
-            parent:holder
-          );
-        
-          // allow for prefabs to switch data types
-          obj.data = objects [i];
-
-          string name = objects [i].name;
-
-          obj.name = $"{name}_{j}";
-          obj.pool = this;
-
-          obj.gameObject.SetActive (false);
-          // Logger.Log ($"Create object {name}", obj);
-          // OnDisableObject (obj);
         }
       }
     }
 
-    public AbstractPoolable GetInactiveObject (bool random = false)
+    public AbstractPoolable GetInactiveObject (DataObject data)
     {
       if (inactiveObjects.Count > 0)
       {
-        if (random)
-        {
-          return inactiveObjects [Random.Range (0, inactiveObjects.Count)];
-        }
-        else
-        {
-          return inactiveObjects [0];
-        }
+        return inactiveObjects.Find (x => x.data == data);
       }
       else
       {

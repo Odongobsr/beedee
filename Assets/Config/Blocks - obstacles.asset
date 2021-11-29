@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38821dc9a1c3a9e438304ab0c6a6ea86, type: 3}
+  m_Name: Blocks - obstacles
+  m_EditorClassIdentifier: 
+  me: {fileID: 11400000}
+  blocks:
+  - {fileID: 11400000, guid: cf3274697f89f1f4bae9d3df0f9907b2, type: 2}
+  - {fileID: 11400000, guid: 5630a8dd4ef24814192fb127dd493fa8, type: 2}
+  - {fileID: 11400000, guid: 6ae75436b502ac448a806c8ceab537e5, type: 2}
+  - {fileID: 11400000, guid: 5ca8277ff360c3a42a981b92e912d4f9, type: 2}
+  - {fileID: 11400000, guid: 3c1230087a6af5444bd9028bd756f632, type: 2}
+  - {fileID: 11400000, guid: b3c62942091c03340938ff3736a0932c, type: 2}
+  - {fileID: 11400000, guid: 756852a68095afe43b18b1f5301bb352, type: 2}
+  - {fileID: 11400000, guid: c3e7146e250d1354eabcc108b8a21021, type: 2}
+  count: 5

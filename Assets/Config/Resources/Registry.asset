@@ -40,26 +40,14 @@ MonoBehaviour:
   doubleObstacleGapMin: 1
   doubleObstacleGapMax: 1
   doubleObstacleXOffset: 1
-  obstacleDataList:
-  - {fileID: 11400000, guid: 6ae75436b502ac448a806c8ceab537e5, type: 2}
-  - {fileID: 11400000, guid: c3e7146e250d1354eabcc108b8a21021, type: 2}
-  - {fileID: 11400000, guid: cf3274697f89f1f4bae9d3df0f9907b2, type: 2}
-  - {fileID: 11400000, guid: 756852a68095afe43b18b1f5301bb352, type: 2}
-  - {fileID: 11400000, guid: b3c62942091c03340938ff3736a0932c, type: 2}
-  - {fileID: 11400000, guid: 5ca8277ff360c3a42a981b92e912d4f9, type: 2}
-  - {fileID: 11400000, guid: 3c1230087a6af5444bd9028bd756f632, type: 2}
-  - {fileID: 11400000, guid: 5630a8dd4ef24814192fb127dd493fa8, type: 2}
   flowerInterval: 10
   flowerPoolSize: 5
-  flowerDataList:
-  - {fileID: 11400000, guid: 3f00c54275455f34c89e1d39c1d0e67d, type: 2}
   blocks: []
   levels: []
   obstacleTag: Obstacle
+  coinTag: Coin
   flowerTag: Flower
   playerTag: Player
-  orange: {r: 0.96862745, g: 0.5803922, b: 0.11372549, a: 1}
-  lightred: {r: 0.91764706, g: 0.34901962, b: 0.34901962, a: 1}
   togglePrefab: {fileID: 5682761403948833194, guid: 86df785dea410e6449ea400c27a3985a, type: 3}
   styles:
   - {fileID: 11400000, guid: 95c6adc016c26994fad1b4271dd7ae43, type: 2}

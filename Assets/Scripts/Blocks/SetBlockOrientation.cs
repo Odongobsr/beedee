@@ -42,29 +42,34 @@ namespace Bee
       {
         // move to left edge of screen
         case Orientation.Left:
-          pos = Camera.main.ViewportToWorldPoint (new Vector3 (0, 0, 0));
-          if (rotate)
-          {
-            trans.rotation = Quaternion.Euler (0, 0, -90);
-          }
+          pos = Camera.main.ViewportToWorldPoint (new Vector3 (.25f, 0, 0));
           break;
           
         // move to center of screen
         case Orientation.Center:
           pos = Camera.main.ViewportToWorldPoint (new Vector3 (0.5f, 0, 0));
-          if (rotate)
-          {
-            trans.rotation = Quaternion.identity;
-          }
           break;
           
         // move to right edge of screen
         case Orientation.Right:
-          pos = Camera.main.ViewportToWorldPoint (new Vector3 (1, 0, 0));
-          if (rotate)
+          pos = Camera.main.ViewportToWorldPoint (new Vector3 (.75f, 0, 0));
+          break;
+
+        case Orientation.Random:
+          Vector3 vec = Vector3.zero;
+          if (Random.value < .33f)
           {
-            trans.rotation = Quaternion.Euler (0, 0, 90);
+            vec.x = .25f; // left
           }
+          else if (Random.value < .66f)
+          {
+            vec.x = 0.5f; // center
+          }
+          else
+          {
+            vec.x = .75f; // right
+          }
+          pos = Camera.main.ViewportToWorldPoint (vec);
           break;
       }
 

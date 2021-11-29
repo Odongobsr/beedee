@@ -29,8 +29,7 @@ namespace Bee
 
       // create flower object pool
       objectSpawner.objectPool.CreateObjects (
-        objects: GameGlobals.Instance.registry.GetFlowerDataObjects (),
-        count: GameGlobals.Instance.registry.flowerPoolSize
+        // count: GameGlobals.Instance.registry.flowerPoolSize
       );
 
       return true;

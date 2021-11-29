@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   me: {fileID: 11400000}
   prefab: {fileID: 7414121315366315500, guid: 7662b1ff291af6e48b3ff663ce262c3d, type: 3}
-  orientation: 0
+  orientation: 2
   rotateToOrientation: 0

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Float - obstacleWaitTime
   m_EditorClassIdentifier: 
   me: {fileID: 11400000}
-  value: 2
+  value: 1

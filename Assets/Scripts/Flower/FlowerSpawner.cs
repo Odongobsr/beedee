@@ -17,7 +17,7 @@ namespace Bee
       // Logger.Log ($"Module: {modulo}", gameObject);
       if (modulo == 0)
       {
-        AbstractPoolable flower = GameGlobals.Instance.gameController.flowerManager.objectSpawner.SpawnObject (transform);
+        // AbstractPoolable flower = GameGlobals.Instance.gameController.flowerManager.objectSpawner.SpawnObject (transform);
       }
     }
   }
