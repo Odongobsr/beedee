@@ -118,7 +118,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 4ca4aecbcf764934eb8d22ba7f0925c6, type: 3}
   m_Color: {r: 0.24736814, g: 0.38665283, b: 0.7169812, a: 1}
   m_FlipX: 0
@@ -238,6 +238,7 @@ MonoBehaviour:
   yDir: 1
   limitToScreenX: 0
   desiredVelocity: {x: 0, y: 0}
+  originalParent: {fileID: 0}
   body: {fileID: 8648330543369230616}
   scripts: {fileID: 2010613290051166645}
   velocityModifiers: []
@@ -254,6 +255,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c3e9e1608e2284298b38a90dcf7ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroy: 0
+  block: {fileID: 0}
 --- !u!114 &613149250431103077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,4 +283,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 0
+  dontSetOrientation: 0
   block: {fileID: 7981580691242365673}

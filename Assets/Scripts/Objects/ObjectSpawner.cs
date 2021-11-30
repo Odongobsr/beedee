@@ -45,29 +45,6 @@ namespace Bee
       Assert.IsNotNull (objectPatternGenerator);
     }
 
-    public void StartSpawningObjects (FloatVariable wait)
-    {
-      waitTime = wait;
-      StartCoroutine (SpawnObjectCoroutine ());
-    }
-
-    IEnumerator SpawnObjectCoroutine ()
-    {
-      Logger.Log ("Start spawning objects", this);
-
-      while (true)
-      {
-        if (patternIndex >= objectPattern.objects.Count)
-        {
-          RegeneratePattern ();
-        }
-
-        SpawnObject ();
-
-        yield return new WaitForSeconds (waitTime.value);
-      }
-    }
-
     [ContextMenu ("Regenerate Pattern")]
     void RegeneratePattern ()
     {
@@ -81,17 +58,17 @@ namespace Bee
 
     public AbstractPoolable SpawnObject (Transform parent = null)
     {
-      // if (GameGlobals.Instance.registry.paused)
-      // {
-        // return null;
-      // }
-      
       if (objectPool.inactiveObjects.Count == 0)
       {
         Logger.LogWarning ($"No inactive objects in pool {objectPool} !", this);
         return null;
       }
 
+      if (patternIndex >= objectPattern.objects.Count)
+      {
+        RegeneratePattern ();
+      }
+      
       AbstractPoolable obj = objectPool.GetInactiveObject (objectPattern.objects [patternIndex]);
 
       if (null == obj)

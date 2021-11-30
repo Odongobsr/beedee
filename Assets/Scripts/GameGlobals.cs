@@ -21,6 +21,7 @@ namespace Bee
     public GameIntroPrompt gameIntroPrompt;
     public UIScreen playerButtonsUIScreen;
     public SpriteRendererController darkGroundSprite;
+    public Transform transformHolder;
 
     private static GameGlobals _instance;
     public static GameGlobals Instance

@@ -90,7 +90,6 @@ namespace Bee
     public void ToggleSelect (string value)
     {
       GameGlobals.Instance.registry.userDataReader.userData.language = value;
-      GameGlobals.Instance.registry.userDataReader.userData.hasSelectedLanguage = true;
       GameGlobals.Instance.registry.userDataReader.SaveUserData ();
 
       GameGlobals.Instance.registry.rosettaReader.UpdateLanguage ();
@@ -98,6 +97,8 @@ namespace Bee
 
     public void ActivateMainMenu ()
     {
+      GameGlobals.Instance.registry.userDataReader.userData.hasSelectedLanguage = true;
+
       chooseLanguageButton.onClick.RemoveAllListeners ();
 
       GameGlobals.Instance.mainMenuController.Activate ();

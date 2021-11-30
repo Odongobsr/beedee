@@ -66,6 +66,8 @@ namespace Bee
         this
       );
 
+      yield return new WaitForSeconds (1);
+
       isPlaying = true;
       index = 0;
 

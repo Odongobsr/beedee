@@ -192,9 +192,9 @@ namespace Bee
 
       yield return new WaitForSeconds (currentState.introTime);
 
-      GameGlobals.Instance.registry.SetWorldState (WorldState.Complete);
-
       currentState.Enter(listeners: listenerDict [currentState.state]);
+
+      GameGlobals.Instance.registry.SetWorldState (WorldState.Complete);
     }
 
     public AbstractState GetState (State state)

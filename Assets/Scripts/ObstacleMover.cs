@@ -10,8 +10,9 @@ namespace Bee
     {
       Vector2 desiredVelocity = new Vector2 ();
 
-      desiredVelocity += 
-        (Vector2) GameGlobals.Instance.registry.obstacleSpeed;
+      desiredVelocity -= 
+        new Vector2 (0, GameGlobals.Instance.registry.globalSpeedMultiplier);
+        // (Vector2) GameGlobals.Instance.registry.obstacleSpeed;
 
       return desiredVelocity;
     }

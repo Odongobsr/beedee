@@ -51,6 +51,8 @@ namespace Bee
       // user has already selected language
       if (!base.Activate ()) return false;
 
+      languageSelector.languageSelectScreen.Deactivate ();
+
       // if intro cutscene has already been shown, activate main menu
       if (GameGlobals.Instance.registry.hasShownIntroCutscene)    
       {

@@ -7,6 +7,9 @@ namespace Bee
 {
   public class GameController : SceneController
   {
+    [Header ("Configuration")]
+    public float globalYPosition;
+
     [Header ("References")]
     public ObstacleManager obstacleManager;
     public Event_SwitchScene switchToMainMenu;
@@ -46,6 +49,13 @@ namespace Bee
       {
         switchToMainMenu.RunEvent (this);
       }
+    }
+
+    public override void MyFixedUpdate ()
+    {
+      base.MyFixedUpdate ();
+
+      globalYPosition += GameGlobals.Instance.registry.globalSpeedMultiplier * Time.fixedDeltaTime;
     }
 
     public override void OnEnable()

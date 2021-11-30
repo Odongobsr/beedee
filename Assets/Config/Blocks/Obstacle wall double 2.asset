@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Obstacle wall double 2
   m_EditorClassIdentifier: 
   me: {fileID: 11400000}
-  prefab: {fileID: 6623537243999037532, guid: f221930cebabea24e931e1d3db0187a8, type: 3}
-  orientation: 0
+  prefab: {fileID: 6623537243999037532, guid: 9a6cc21e2dce1674daee6c59ab3ccc55, type: 3}
+  orientation: 2
   rotateToOrientation: 1

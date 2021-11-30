@@ -8,14 +8,14 @@ namespace Bee
   public class ObstacleManager : StateListener
   {
     [Header ("Configuration")]
-    public ObjectPatternGenerator objectPatternGenerator;
+    public bool isSpawning;
 
     [Header ("References")]
     public ObjectSpawner objectSpawner;
 
     [Header ("Runtime only")]
-    public Stack<Block> inactiveObstacles = new Stack<Block> ();  
-    public Stack<Block> activeObstacles = new Stack<Block> ();  
+    // public float lastSpawnPosition;
+    public float nextSpawnPosition;
 
     public override void CheckAssertions ()
     {
@@ -34,9 +34,35 @@ namespace Bee
       return true;
     }
 
+    public override void MyFixedUpdate()
+    {
+      base.MyFixedUpdate();
+
+      if (isSpawning)
+      {
+        if (GameGlobals.Instance.gameController.globalYPosition >= nextSpawnPosition)
+        {
+          objectSpawner.SpawnObject ();
+          UpdateSpawnPosition ();
+        }
+      }
+    }
+
     public void StartSpawningObstacles ()
     {
-      objectSpawner.StartSpawningObjects (wait: GameGlobals.Instance.registry.obstacleWaitTime);
+      UpdateSpawnPosition ();
+      isSpawning = true;
+      Logger.Log (
+        $"Start spawning obstacles",
+        this
+      );
+    }
+
+    void UpdateSpawnPosition ()
+    {
+      nextSpawnPosition = 
+        GameGlobals.Instance.gameController.globalYPosition + 
+        GameGlobals.Instance.registry.spawnDistance;
     }
   }
 }

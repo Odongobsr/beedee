@@ -34,12 +34,12 @@ namespace Bee
       Vector3 leftPos = leftObstacle.transform.position;
       if (leftObstacle.GetAttachedColliders (colliders) > 0)
       {
-        leftPos.x = -colliders [0].bounds.size.x;
+        leftPos.x = -colliders [0].bounds.size.x / 2;
       }
       Vector3 rightPos = rightObstacle.transform.position;
       if (rightObstacle.GetAttachedColliders (colliders) > 0)
       {
-        rightPos.x = colliders [0].bounds.size.x;
+        rightPos.x = colliders [0].bounds.size.x / 2;
       }
       
       // insert gap between obstacles
@@ -56,17 +56,17 @@ namespace Bee
       rightObstacle.transform.position = rightPos;
 
       // adjust x offset
-      float offset = 
-        Random.Range (
-          -GameGlobals.Instance.registry.doubleObstacleXOffset, 
-          GameGlobals.Instance.registry.doubleObstacleXOffset
-        );
+      // float offset = 
+      //   Random.Range (
+      //     -GameGlobals.Instance.registry.doubleObstacleXOffset, 
+      //     GameGlobals.Instance.registry.doubleObstacleXOffset
+      //   );
 
-      transform.position += new Vector3 (offset, 0, 0);
+      // transform.position = new Vector3 (offset, 0, 0);
 
       // Logger.Log ($"Left obstacle position: {leftPos}", leftObstacle);
       // Logger.Log ($"Right obstacle position: {rightPos}", rightObstacle);
-      // Logger.Log ($"Setup double obstacle {this}", this);
+      // Logger.Log ($"Gap {gap}", this);
     }
   }
 }

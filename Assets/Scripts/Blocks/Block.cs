@@ -13,6 +13,7 @@ namespace Bee
     public Vector2 desiredVelocity;
 
     [Header ("References")]
+    public Transform originalParent;
     public Rigidbody2D body;
     public Transform scripts;
 
@@ -20,6 +21,13 @@ namespace Bee
     public List<AbstractVelocityModifier> velocityModifiers;
     public List<AbstractBlockDependent> dependents = new List<AbstractBlockDependent> ();
 
+    public override void Awake()
+    {
+      base.Awake();
+
+      originalParent = transform.parent;
+    }
+    
     public override  void Start()
     {
       base.Start ();
@@ -59,12 +67,12 @@ namespace Bee
         
         if (desiredVelocity.x < 0)
         {
-          if(pos.x < 0.0) desiredVelocity.x = 0;
+          if(pos.x < 0.1) desiredVelocity.x = 0;
         }
         else
         if (desiredVelocity.x > 0)
         {
-          if(pos.x > 1.0) desiredVelocity.x = 0;
+          if(pos.x > 0.9) desiredVelocity.x = 0;
         }
         // if(pos.y < 0.0) Logger.Log("I am below the camera's view.");
         // if(1.0 < pos.y) Logger.Log("I am above the camera's view.");

@@ -22,12 +22,17 @@ namespace Bee
     /// How long do we wait before beginning gameplay
     /// </summary>
     public int introTime;
-    [Range (0.5f, 3)]
+    [Range (0.5f, 4)]
     public float globalSpeedMultiplier;
     [Range (1, 5)]
     public float playerMoveSpeed = 3;
     [Range (1, 5)]
     public float deathTimeout = 1;
+    /// <summary>
+    /// How far does player move for new obstacle to be spanwed?
+    /// </summary>
+    [Range (1, 5)]
+    public int spawnDistance;
 
     [Range (1, 7)]
     public float cutsceneFrameTime;
@@ -62,7 +67,7 @@ namespace Bee
     public FloatVariable flowerWaitTime;
     
     [Header ("Obstacles")]
-    public Vector2 obstacleSpeed;
+    // public Vector2 obstacleSpeed;
     [Range (1, 5)]
     public int obstaclePoolSize;
     [Range (1, 3)]
@@ -153,11 +158,6 @@ namespace Bee
       rosettaReader.UpdateLanguage ();
 
       Logger.LogEnd ("Setup registry");
-    }
-
-    public float GetGlobalSpeed ()
-    {
-        return globalSpeedMultiplier;
     }
 
     public AbstractState GetState(State _state)

@@ -7,13 +7,20 @@ namespace Bee
 {
   public class SetBlockOrientation : AbstractGameComponent
   {
+    public bool dontSetOrientation;
     public Block block;
+
+    float left = -2;
+    float center = 0;
+    float right = 2;
 
     public override void OnEnable ()
     {
       base.OnEnable ();
 
       Assert.IsNotNull (block);
+
+      if (dontSetOrientation) return;
 
       if (block && block.data)   
       {
@@ -42,38 +49,41 @@ namespace Bee
       {
         // move to left edge of screen
         case Orientation.Left:
-          pos = Camera.main.ViewportToWorldPoint (new Vector3 (.25f, 0, 0));
+          // pos = Camera.main.ViewportToWorldPoint (new Vector3 (left, 0, 0));
+          pos.x = left;
           break;
           
         // move to center of screen
         case Orientation.Center:
-          pos = Camera.main.ViewportToWorldPoint (new Vector3 (0.5f, 0, 0));
+          // pos = Camera.main.ViewportToWorldPoint (new Vector3 (center, 0, 0));
+          pos.x = center;
           break;
           
         // move to right edge of screen
         case Orientation.Right:
-          pos = Camera.main.ViewportToWorldPoint (new Vector3 (.75f, 0, 0));
+          // pos = Camera.main.ViewportToWorldPoint (new Vector3 (right, 0, 0));
+          pos.x = right;
           break;
 
         case Orientation.Random:
           Vector3 vec = Vector3.zero;
           if (Random.value < .33f)
           {
-            vec.x = .25f; // left
+            pos.x = left; // left
           }
           else if (Random.value < .66f)
           {
-            vec.x = 0.5f; // center
+            pos.x = center; // center
           }
           else
           {
-            vec.x = .75f; // right
+            pos.x = right; // right
           }
-          pos = Camera.main.ViewportToWorldPoint (vec);
+          // pos = Camera.main.ViewportToWorldPoint (vec);
           break;
       }
 
-      trans.position = new Vector3 (pos.x, trans.position.y, trans.position.z);
+      trans.position = pos;
       // Logger.Log ($"Set {trans.name} orientation to {orientation}. Position {trans.position}", trans);
     }
   }

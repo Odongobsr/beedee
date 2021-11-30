@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockDestroyer : MonoBehaviour
+namespace Bee
 {
-  void OnTriggerEnter2D(Collider2D other)
+  public class BlockDestroyer : MonoBehaviour
   {
-    if (other.CompareTag ("Destroy"))
+    void OnTriggerEnter2D(Collider2D other)
     {
-      gameObject.SetActive (false);
-    }       
+      if (other.CompareTag ("Destroy"))
+      {
+        gameObject.SetActive (false);
+      }       
+    }
   }
 }
