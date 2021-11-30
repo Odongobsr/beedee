@@ -17,6 +17,7 @@ namespace Bee
     public bool paused;
     public bool debugMode;
     public bool hasShownIntroCutscene;
+    public int score;
     
     /// <summary>
     /// How long do we wait before beginning gameplay

@@ -10,6 +10,7 @@ namespace Bee
     choose_language = 300,
     continue_text = 301,
     english = 500,
+    energy = 501,
     get_ready = 700,
     intro_frame_one = 900,
     intro_frame_two = 901,
@@ -17,6 +18,7 @@ namespace Bee
     intro_frame_four = 903,
     start = 1901,
     swahili = 1902,
+    score = 1903,
     tap_to_start = 2000,
   }
 }

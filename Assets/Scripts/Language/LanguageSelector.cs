@@ -99,6 +99,8 @@ namespace Bee
     {
       GameGlobals.Instance.registry.userDataReader.userData.hasSelectedLanguage = true;
 
+      GameGlobals.Instance.registry.userDataReader.SaveUserData ();
+
       chooseLanguageButton.onClick.RemoveAllListeners ();
 
       GameGlobals.Instance.mainMenuController.Activate ();

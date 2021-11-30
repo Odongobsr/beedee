@@ -4,6 +4,14 @@ using UnityEngine;
 
 namespace Bee
 {
+    [System.Serializable]
+  public class PatternRuleSet
+  {
+    public List<PatternRule> patternRules;
+
+    public int count;
+  }
+
   [System.Serializable]
   public class PatternRule
   {
@@ -19,6 +27,6 @@ namespace Bee
   )]
   public class ObjectPatternRules : AbstractScriptableObject
   {
-    public List<PatternRule> patternRules;
+    public List<PatternRuleSet> patternRules;
   }
 }

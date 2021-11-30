@@ -508,7 +508,7 @@ MonoBehaviour:
   active: 0
   isSetup: 0
   isActive: 0
-  activeStates: 
+  activeStates: 01000000
   listeners: []
   dontDeactivateOnAwake: 0
   dontCenterOnScreen: 0
@@ -2200,7 +2200,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -182}
-  m_SizeDelta: {x: 500, y: 200}
+  m_SizeDelta: {x: 550, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1924671832
 MonoBehaviour:

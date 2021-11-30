@@ -192,9 +192,9 @@ namespace Bee
 
       yield return new WaitForSeconds (currentState.introTime);
 
-      currentState.Enter(listeners: listenerDict [currentState.state]);
-
       GameGlobals.Instance.registry.SetWorldState (WorldState.Complete);
+
+      currentState.Enter(listeners: listenerDict [currentState.state]);
     }
 
     public AbstractState GetState (State state)
@@ -226,14 +226,14 @@ namespace Bee
       }
     }
 
-#if UNITY_EDITOR
-    private void OnGUI()
-    {
-        string content = currentState != null ? currentState.name : "(no current state)";
-        content += $"\nWorld state: {GameGlobals.Instance.registry.worldState}";
+// #if UNITY_EDITOR
+//     private void OnGUI()
+//     {
+//         string content = currentState != null ? currentState.name : "(no current state)";
+//         content += $"\nWorld state: {GameGlobals.Instance.registry.worldState}";
 
-        GUILayout.Label($"<color='white'><size=40>{content}</size></color>");
-    }
-#endif
+//         GUILayout.Label($"<color='white'><size=40>{content}</size></color>");
+//     }
+// #endif
   }
 }

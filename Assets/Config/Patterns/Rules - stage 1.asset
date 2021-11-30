@@ -14,9 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   me: {fileID: 11400000}
   patternRules:
-  - blockCollection: {fileID: 11400000, guid: 5c2e92773b85d19478bdd68c54fc23bd, type: 2}
-    minCount: 1
-    maxCount: 2
-  - blockCollection: {fileID: 11400000, guid: 61a362b7339d6ec429a38602a6f27d0f, type: 2}
-    minCount: 1
-    maxCount: 1
+  - patternRules:
+    - blockCollection: {fileID: 11400000, guid: 5c2e92773b85d19478bdd68c54fc23bd, type: 2}
+      minCount: 1
+      maxCount: 2
+    - blockCollection: {fileID: 11400000, guid: 61a362b7339d6ec429a38602a6f27d0f, type: 2}
+      minCount: 1
+      maxCount: 1
+    count: 4
+  - patternRules:
+    - blockCollection: {fileID: 11400000, guid: 5c2e92773b85d19478bdd68c54fc23bd, type: 2}
+      minCount: 1
+      maxCount: 1
+    count: 1
+  - patternRules:
+    - blockCollection: {fileID: 11400000, guid: 22dec23efb73623439fb5f247a5da881, type: 2}
+      minCount: 1
+      maxCount: 1
+    count: 1

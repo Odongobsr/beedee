@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38821dc9a1c3a9e438304ab0c6a6ea86, type: 3}
+  m_Name: Blocks - flowerbuffer
+  m_EditorClassIdentifier: 
+  me: {fileID: 11400000}
+  blocks:
+  - {fileID: 11400000, guid: 79297134b0eb9214c9b19927ebb0b013, type: 2}
+  - {fileID: 11400000, guid: 79297134b0eb9214c9b19927ebb0b013, type: 2}
+  - {fileID: 11400000, guid: 4fb739142ccfbf54daa064ef3ff11df1, type: 2}
+  count: 1

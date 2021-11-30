@@ -26,15 +26,21 @@ namespace Bee
       objectPattern = new ObjectPattern();
       objectPattern.objects = new List<DataObject> ();
 
-      for (int i = 0; i < currentRules.patternRules.Count; i++)
+      for (int k = 0; k < currentRules.patternRules.Count; k++) // how many sets?
       {
-        PatternRule rule = currentRules.patternRules [i];
-
-        int count = Random.Range (rule.minCount, rule.maxCount);
-
-        for (int j = 0; j < count; j++)
+        for (int i = 0; i < currentRules.patternRules [k].count; i++) // how many times do we repeat rules in set?
         {
-          objectPattern.objects.Add (rule.blockCollection.GetRandomBlock ());
+          for (int l = 0; l < currentRules.patternRules [k].patternRules.Count; l++) // how many rules in set?
+          {
+            PatternRule rule = currentRules.patternRules [k].patternRules [l];
+
+            int count = Random.Range (rule.minCount, rule.maxCount);
+
+            for (int j = 0; j < count; j++) // how many object in rule?
+            {
+              objectPattern.objects.Add (rule.blockCollection.GetRandomBlock ());
+            }
+          }
         }
       }
 

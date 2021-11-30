@@ -46,6 +46,15 @@ namespace Bee
 
       if (player.alive)
       {
+        
+        if (!other.CompareTag ("Untagged"))
+        {
+          Logger.Log (
+            $"Player has hit {other.attachedRigidbody.tag} - {other.attachedRigidbody.name}", 
+            other.attachedRigidbody
+          );
+        }
+
         // has player hit obstacle?
         if (other.CompareTag (GameGlobals.Instance.registry.obstacleTag))
         {
@@ -72,13 +81,12 @@ namespace Bee
         {
           other.gameObject.SetActive (false);
           coinSound.Play ();
+          GameGlobals.Instance.registry.score += 1;
+          Logger.Log (
+            $"Add score: {other.name}",
+            other
+          ); 
         }
-
-        if (!other.CompareTag ("Untagged"))
-        {
-          Logger.Log ($"Player has hit {other.attachedRigidbody.tag} - {other.attachedRigidbody.name}", other.attachedRigidbody);
-        }
-
       }
     }
 

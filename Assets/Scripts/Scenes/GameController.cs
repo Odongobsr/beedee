@@ -70,13 +70,17 @@ namespace Bee
     {
       GameGlobals.Instance.playerButtonsUIScreen.Activate ();
 
-      int introTime = GameGlobals.Instance.registry.introTime;
+      yield return new WaitForEndOfFrame ();
 
-      Logger.Log ($"Start game in {introTime} seconds");
+      // int introTime = GameGlobals.Instance.registry.introTime;
 
-      yield return new WaitForSeconds (introTime);
+      // Logger.Log ($"Start game in {introTime} seconds");
+
+      // yield return new WaitForSeconds (introTime);
 
       Logger.Log ("Start game");
+
+      GameGlobals.Instance.registry.score = 0;
 
       obstacleManager.StartSpawningObstacles ();
     }

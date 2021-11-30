@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 8904097442294319132}
   - component: {fileID: 3860007843721415565}
   - component: {fileID: 3886761225122056247}
-  - component: {fileID: 4307638589982315863}
+  - component: {fileID: 6969331544372711604}
   - component: {fileID: 7656787608816502521}
-  - component: {fileID: 6930832964630989409}
-  - component: {fileID: 3090999144844735354}
   - component: {fileID: 4567405263082211627}
+  - component: {fileID: 6361575509899559345}
+  - component: {fileID: 3029202070760634526}
   m_Layer: 0
   m_Name: flower
   m_TagString: Flower
@@ -87,7 +87,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4307638589982315863
+--- !u!114 &6969331544372711604
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,25 +96,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 275413543542419143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ee106cd57fc6494aa834425d5dae8aa, type: 3}
+  m_Script: {fileID: 11500000, guid: fde7d944f922ec941955fb093d4a0297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 0
   isSetup: 0
-  isInit: 0
   isActive: 0
   activeStates: 02000000
   listeners: []
-  data: {fileID: 11400000, guid: 3f00c54275455f34c89e1d39c1d0e67d, type: 2}
+  data: {fileID: 0}
   pool: {fileID: 0}
   xDir: 1
   yDir: 1
   limitToScreenX: 0
   desiredVelocity: {x: 0, y: 0}
+  originalParent: {fileID: 0}
   body: {fileID: 3860007843721415565}
   scripts: {fileID: 2581064146865727434}
   velocityModifiers: []
   dependents: []
-  alive: 0
 --- !u!114 &7656787608816502521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,33 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c3e9e1608e2284298b38a90dcf7ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6930832964630989409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 275413543542419143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49d74469d0c13a842808080b4aa1ce2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: {x: 0, y: 2, z: 0}
---- !u!114 &3090999144844735354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 275413543542419143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dc4ee615f99c614ebfe0fc523b755c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orientation: 0
-  flower: {fileID: 4307638589982315863}
 --- !u!114 &4567405263082211627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,12 +139,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f70ad0cf0c23449abc4544ef5fcf1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSetup: 0
-  isInit: 0
-  isActive: 0
-  activeStates: 
-  listeners: []
   obj: {fileID: 7716010073002958913}
+--- !u!114 &6361575509899559345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275413543542419143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d43695bab1b7f6a4f8ab09db635e2222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topOfScreen: 1
+--- !u!114 &3029202070760634526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275413543542419143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c5ebae94209fbc44b2b971ad453d6f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 0
+  dontSetOrientation: 0
+  block: {fileID: 6969331544372711604}
 --- !u!1 &3685848841676678221
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,8 +211,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d43a2b0fb8b8fe14fb49e4f4942116dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 0
   isSetup: 0
-  isInit: 0
   isActive: 0
   activeStates: 
   listeners: []
@@ -5037,8 +5033,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 270b0983ae33d014bac6a5fe8d1c3e4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 0
   isSetup: 0
-  isInit: 0
   isActive: 0
   activeStates: 
   listeners: []

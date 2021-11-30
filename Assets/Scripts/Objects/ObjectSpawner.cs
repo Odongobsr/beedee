@@ -73,7 +73,10 @@ namespace Bee
 
       if (null == obj)
       {
-        Logger.LogWarning ("Object is null!", this);
+        Logger.LogWarning (
+          $"Object is null - {objectPattern.objects [patternIndex].name.Important ()}", 
+          this
+        );
         return null;
       }
       
