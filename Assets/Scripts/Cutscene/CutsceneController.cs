@@ -44,7 +44,7 @@ namespace Bee
         // detect user input
         if (Input.GetMouseButtonDown (0) || Input.GetKeyDown (KeyCode.Space))    
         {
-          StopCutscene ();
+          StopCutscene (_playSound: true);
         }
       }
     }
@@ -78,7 +78,7 @@ namespace Bee
         text.text = GameGlobals.Instance.registry.rosettaReader.GetKey (frames [index].text);
 
         Logger.Log (
-          $"{image.sprite.name} - {text.text}",
+          $"Frame {index.ToString ().Important ()} - {text.text}",
           image.sprite
         );
       
@@ -95,14 +95,14 @@ namespace Bee
       StopCutscene ();
     }
 
-    public void StopCutscene ()
+    public void StopCutscene (bool _playSound = false)
     {
       StopAllCoroutines ();
 
-      StartCoroutine (StopCutsceneCoroutine ());
+      StartCoroutine (StopCutsceneCoroutine (_playSound: _playSound));
     }
 
-    IEnumerator StopCutsceneCoroutine ()
+    IEnumerator StopCutsceneCoroutine (bool _playSound = false)
     {      
       Logger.Log (
         $"Finished {name}",
@@ -111,6 +111,13 @@ namespace Bee
       isPlaying = false;
 
       UIScreen.Deactivate ();
+
+      if (_playSound)
+      {
+        GameGlobals.Instance.audioManager.PlayFX (
+          _clip: GameGlobals.Instance.registry.audioRegistry.fx_select
+        );
+      }
 
       yield return new WaitForSeconds (1);
 

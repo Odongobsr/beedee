@@ -29,6 +29,7 @@ namespace Bee
       if (!base.Enter ()) return false;
 
       // create obstacle object pool
+       objectSpawner.RegeneratePattern ();
        objectSpawner.objectPool.CreateObjects ();
 
       return true;

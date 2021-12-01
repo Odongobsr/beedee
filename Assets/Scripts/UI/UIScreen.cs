@@ -45,33 +45,48 @@ namespace Bee
       {
         Deactivate (0);
       }
-    }
-
-    public override bool Enter()
-    {
-      if (!base.Enter()) return false;
-      
       if (!dontCenterOnScreen)
       {
         CenterOnScreen ();
       }
-
-      return true;
     }
+
+    public override void Activate()
+    {
+      base.Activate();
+
+      Activate ();
+    }
+
+    public override void Deactivate()
+    {
+      base.Deactivate();
+
+      Deactivate ();
+    }
+
+    // public override bool Enter()
+    // {
+    //   if (!base.Enter()) return false;
+      
+    //   return true;
+    // }
 
     void CenterOnScreen ()
     {
       rectTransform.anchoredPosition = Vector3.zero;
     }
-
+  
     public void Activate (float _time = 1, UnityAction _onCompleteAction = null)
     {
+      transform.SetAsLastSibling ();
       onCompleteAction = _onCompleteAction;
       StartCoroutine (FadeCoroutine (_finalAlpha: 1, _time: _time));
     }
 
     public void Deactivate (float _time = 1, UnityAction _onCompleteAction = null)
     {
+      // transform.SetAsFirstSibling ();
       onCompleteAction = _onCompleteAction;
       StartCoroutine (FadeCoroutine (_finalAlpha: 0, _time: _time));
     }
@@ -108,6 +123,10 @@ namespace Bee
       if (canvasGroup.alpha > 0)
       {
         EnableInteractivity();
+      }
+      else
+      {
+        DisableInteractivity ();
       }
 
       onCompleteAction?.Invoke ();

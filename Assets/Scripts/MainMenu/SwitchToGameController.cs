@@ -35,9 +35,15 @@ namespace Bee
     {
       if (active && !switchingToGameScene)
       {
+
         // detect user input
         if (Input.GetMouseButtonDown (0) || Input.GetKeyDown (KeyCode.Space))    
         {
+          if (GameGlobals.Instance.UIRaycaster.CheckIfUIObjectHasBeenHit (Input.mousePosition))
+          {
+            return;
+          }
+
           if (mainMenuController.introCutscene.isPlaying)
           {
             mainMenuController.introCutscene.StopCutscene ();
@@ -55,8 +61,9 @@ namespace Bee
       Logger.Log ("Try switch to game scene");
       switchingToGameScene = true;
 
-      switcher.gameObject.SetActive (true);
-      audioSource.Play ();
+      // switcher.gameObject.SetActive (true);
+      GameGlobals.Instance.registry.sceneLoader.LoadGameScene ();
+      // audioSource.Play ();
     }
   }
 }

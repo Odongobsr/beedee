@@ -31,10 +31,10 @@ public static class ListExtensionMethods
       return true;
     }
 
-    Debug.LogWarning (
-      list.GetType () + " already contains " + item,
-      null
-    );
+    // Debug.LogWarning (
+    //   list.GetType () + " already contains " + item,
+    //   null
+    // );
     return false;
   }
 

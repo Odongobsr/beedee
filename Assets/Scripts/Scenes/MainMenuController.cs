@@ -31,9 +31,19 @@ namespace Bee
       base.Awake();
 
       GameGlobals.Instance.mainMenuController = this;
+      GameGlobals.Instance.registry.hasShownIntroCutscene = false;
     }
 
-    public override bool Activate()
+    public override void Start ()
+    {
+      base.Start ();
+      
+      GameGlobals.Instance.audioManager.PlayMusic (
+        _clip: GameGlobals.Instance.registry.audioRegistry.music_mainmenu
+      );
+    }
+
+    public override void Activate()
     { 
       // deactivate UI screens
       // introCutscene.UIScreen.Deactivate (0);
@@ -45,11 +55,11 @@ namespace Bee
       if (!hasSelectedLanguage) // if not, activate language selector
       {
         languageSelector.Activate ();
-        return false;
+        return;
       }
 
       // user has already selected language
-      if (!base.Activate ()) return false;
+      base.Activate ();
 
       languageSelector.languageSelectScreen.Deactivate ();
 
@@ -60,10 +70,9 @@ namespace Bee
       }
       else // if introcutscene has not been shown , show it 
       {
+        GameGlobals.Instance.registry.hasShownIntroCutscene = true;
         introCutscene.StartCutscene (ShowMenu);
       }
-
-      return true;
     }
 
 
@@ -78,6 +87,11 @@ namespace Bee
     public void ShowMenu ()
     {
       menuUIScreen.Activate (_onCompleteAction: ActivateSwitchToGameController);
+    }
+
+    public void HideMenu ()
+    {
+      menuUIScreen.Deactivate ();
     }
 
     void ActivateSwitchToGameController ()

@@ -83,8 +83,17 @@ namespace Bee
       yDir = (int) Mathf.Sign (body.velocity.y);
     }
 
-    public void LateUpdate()
+    public override void Pause()
     {
+      base.Pause();
+
+      body.velocity = Vector2.zero;
+    }
+
+    public override void MyLateUpdate()
+    {
+      base.MyLateUpdate ();
+
       desiredVelocity = Vector2.zero;
     }
   }

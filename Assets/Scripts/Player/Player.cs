@@ -9,8 +9,14 @@ namespace Bee
   {
     public bool alive;
     public static Action onPlayerDeath;
+    public static Action onPlayerWin;
 
     public InputHandler inputHandler;
+    
+    /// <summary>
+    /// Shown when player collides with an obstacle
+    /// </summary>
+    public GameObject bump;
 
     public override void Awake ()
     {
@@ -23,15 +29,42 @@ namespace Bee
     {
       base.Start ();
 
-      alive = true;
+      // GameGlobals.Instance.audioManager.beeSound.Play ();
+      GameGlobals.Instance.audioManager.PlayMusic (
+        _clip: GameGlobals.Instance.registry.audioRegistry.music_bee
+      );
+      HideBump ();
+      
       // Logger.Log ($"{name} is alive!", this);
+    }
+
+    public override void MyUpdate()
+    {
+      base.MyUpdate();
+
+      if (GameGlobals.Instance.registry.worldState != WorldState.Complete)
+      {
+        return;
+      }
+
+      GameGlobals.Instance.registry.playerHealth.value -=  
+        Time.deltaTime / GameGlobals.Instance.registry.playerHealthTime;
+
+      if (GameGlobals.Instance.registry.playerHealth.value <= 0)
+      {
+        Logger.Log (
+          $"Player has run out of energy",
+          this
+        );
+        Die ();
+      }
     }
 
     public void Die ()
     {
       if (alive)
       {
-        StartCoroutine (DieCoroutine ());
+        onPlayerDeath?.Invoke ();
       }
       else
       {
@@ -39,25 +72,35 @@ namespace Bee
       }
     }
 
-    IEnumerator DieCoroutine ()
+    internal void HitObstacle(Collider2D other)
     {
-      if (GameGlobals.Instance.registry.worldState != WorldState.Complete)
-      {
-        yield return null;
-      }
+      other.enabled = false;
+      // GameGlobals.Instance.audioManager.obstacleSound.Play ();
+      GameGlobals.Instance.audioManager.PlayFX (
+        _clip: GameGlobals.Instance.registry.audioRegistry.fx_obstacle
+      );
+      GameGlobals.Instance.audioManager.PlayFX (
+        _clip: GameGlobals.Instance.registry.audioRegistry.fx_gameover
+      );
 
-      // GameGlobals.Instance.registry.Pause ();
+      // shake camera
+      GameGlobals.Instance.mainCamera.shakeTransform.Shake (
+        _shakeX: true,
+        _shakeY: true,
+        _strength: 1
+      );
 
-      GameGlobals.Instance.registry.SetWorldState (WorldState.Retired);
-
-      FlowerManager.stepCount = 0;
+      bump.gameObject.SetActive (true);
+      bump.transform.position = transform.position;
+      Invoke ("HideBump", 0.2f);
       
-      Logger.Log ($"{name} has died!", this);
-      alive = false;
+      Die ();
+      // throw new NotImplementedException();
+    }
 
-      yield return new WaitForSeconds (GameGlobals.Instance.registry.deathTimeout);
-
-      onPlayerDeath?.Invoke ();
+    void HideBump ()
+    {
+      bump.gameObject.SetActive (false);
     }
   }
 }

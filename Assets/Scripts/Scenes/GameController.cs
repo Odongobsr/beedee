@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 
 namespace Bee
 {
@@ -9,9 +10,12 @@ namespace Bee
   {
     [Header ("Configuration")]
     public float globalYPosition;
+    public float flowersPollinated;
 
     [Header ("References")]
     public ObstacleManager obstacleManager;
+    public FlowerManager flowerManager;
+    public CoinManager coinManager;
     public Event_SwitchScene switchToMainMenu;
 
     public override void Awake()
@@ -19,6 +23,17 @@ namespace Bee
       base.Awake ();
 
       GameGlobals.Instance.gameController = this;
+
+      // GameGlobals.Instance.fadeScreen.Deactivate (); // fade out
+    }
+
+    public override void Start ()
+    {
+      base.Start ();
+      
+      GameGlobals.Instance.audioManager.PlayMusic (
+        _clip: GameGlobals.Instance.registry.audioRegistry.music_game
+      );
     }
 
 
@@ -27,17 +42,16 @@ namespace Bee
       base.CheckAssertions ();
 
       Assert.IsNotNull (obstacleManager);    
+      Assert.IsNotNull (flowerManager);    
+      Assert.IsNotNull (coinManager);    
       Assert.IsNotNull (switchToMainMenu);     
     }
     
-    public override bool Activate ()
+    public override void Activate ()
     {
-      if (!base.Activate ()) return false;
+      base.Activate ();
 
-      GameGlobals.Instance.playerButtonsUIScreen.Deactivate (0);
       StartCoroutine (StartGameCoroutine ());
-
-      return true;
     }
 
 
@@ -47,7 +61,8 @@ namespace Bee
 
       if (Input.GetKeyDown (KeyCode.Escape))
       {
-        switchToMainMenu.RunEvent (this);
+        GameGlobals.Instance.registry.sceneLoader.LoadMainMenuScene ();
+        // switchToMainMenu.RunEvent (this);
       }
     }
 
@@ -55,20 +70,37 @@ namespace Bee
     {
       base.MyFixedUpdate ();
 
-      globalYPosition += GameGlobals.Instance.registry.globalSpeedMultiplier * Time.fixedDeltaTime;
+      if (GameGlobals.Instance.player.alive)
+      {
+        globalYPosition += GameGlobals.Instance.registry.globalSpeedMultiplier * Time.fixedDeltaTime;
+      }
     }
 
     public override void OnEnable()
     {
       base.OnEnable();
+      
+      Player.onPlayerDeath += PlayerHasDied;
+    }
 
-      // Logger.LogDivider ();
-      // Logger.Log ("Enable game controller");
+    public override void OnDisable ()
+    {
+      base.OnDisable ();
+
+      Player.onPlayerDeath -= PlayerHasDied;
     }
 
     IEnumerator StartGameCoroutine ()
     {
       GameGlobals.Instance.playerButtonsUIScreen.Activate ();
+      GameGlobals.Instance.statsScreen.Activate ();
+      GameGlobals.Instance.getReadyScreen.Deactivate ();
+
+      // reset variables
+      GameGlobals.Instance.registry.score = 0;
+      GameGlobals.Instance.registry.playerHealth.value = 1.2f;
+      GameGlobals.Instance.registry.globalSpeedMultiplier = 
+        GameGlobals.Instance.registry.minSpeedMultiplier;
 
       yield return new WaitForEndOfFrame ();
 
@@ -78,11 +110,49 @@ namespace Bee
 
       // yield return new WaitForSeconds (introTime);
 
+      GameGlobals.Instance.player.alive = true;
+
       Logger.Log ("Start game");
 
-      GameGlobals.Instance.registry.score = 0;
-
       obstacleManager.StartSpawningObstacles ();
+    }
+
+    public void PlayerHasDied ()
+    {
+      StartCoroutine (DieCoroutine ());
+    }
+
+    IEnumerator DieCoroutine ()
+    {
+      if (GameGlobals.Instance.registry.worldState != WorldState.Complete)
+      {
+        yield return null;
+      }
+
+      GameGlobals.Instance.stateMachine.Pause ();
+
+      GameGlobals.Instance.registry.SetWorldState (WorldState.Retired);
+
+      FlowerManager.stepCount = 0;
+      // globalYPosition = 0;
+
+      Logger.Log ($"{GameGlobals.Instance.player.name.Important ()} has died!", this);
+      GameGlobals.Instance.player.alive = false;
+      
+      GameGlobals.Instance.playerButtonsUIScreen.Deactivate ();
+      GameGlobals.Instance.statsScreen.Deactivate ();
+
+      GameGlobals.Instance.audioManager.StopMusic (
+        _clip: GameGlobals.Instance.registry.audioRegistry.music_game
+      );
+
+      GameGlobals.Instance.audioManager.StopMusic (
+        _clip: GameGlobals.Instance.registry.audioRegistry.music_bee
+      );
+
+      yield return new WaitForSeconds (GameGlobals.Instance.registry.deathTimeout);
+
+      GameGlobals.Instance.gameOverScreen.Activate ();
     }
   }
 }

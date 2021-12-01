@@ -18,13 +18,22 @@ namespace Bee
     public bool debugMode;
     public bool hasShownIntroCutscene;
     public int score;
+    public int numberOfFlowers;
     
     /// <summary>
     /// How long do we wait before beginning gameplay
     /// </summary>
     public int introTime;
     [Range (0.5f, 4)]
+    public float minSpeedMultiplier;
+    [Range (0.5f, 4)]
+    public float maxSpeedMultiplier;
+    [Range (0.5f, 4)]
     public float globalSpeedMultiplier;
+    [Range (0, 1)]
+    public float globalSpeedIncreaseStep = 0.25f;
+  
+
     [Range (1, 5)]
     public float playerMoveSpeed = 3;
     [Range (1, 5)]
@@ -56,6 +65,8 @@ namespace Bee
     public PlayerPrefsReader playerPrefsReader;
     public UserDataReader userDataReader;
     public RosettaReader rosettaReader;
+    public SceneLoader sceneLoader;
+    public AudioRegistry audioRegistry;
 
     [Header ("States")]
     public List<AbstractState> states;
@@ -66,6 +77,11 @@ namespace Bee
     [Header ("Variables")]
     public FloatVariable obstacleWaitTime;
     public FloatVariable flowerWaitTime;
+    public FloatVariable playerHealth;
+    /// <summary>
+    /// How long does player health get to zero?
+    /// </summary>
+    public float playerHealthTime = 15;
     
     [Header ("Obstacles")]
     // public Vector2 obstacleSpeed;
@@ -85,8 +101,7 @@ namespace Bee
     public int flowerPoolSize;  
 
     [Header ("References")]
-    public List<BlockData> blocks = new List<BlockData> ();
-    public List<Level> levels = new List<Level> ();
+    public List<ObjectPatternRules> patternRules; 
 
 
     [Header ("Tags")]
@@ -107,6 +122,11 @@ namespace Bee
       List<AbstractGameComponent> gameObjects = 
         new List<AbstractGameComponent> (GameObject.FindObjectsOfType<AbstractGameComponent> ());
 
+      if (!Application.isPlaying)
+      {
+        Logger.LogDivider ();
+      }
+
       Logger.LogList (
         _title: $"Checking {gameObjects.Count} game components:",
         _message: $"{gameObjects.PrintMe ()}",
@@ -118,6 +138,41 @@ namespace Bee
         gameObjects [i].CheckAssertions ();
       }
     }
+
+    [ContextMenu ("Check Assertions")]
+    public override void CheckAssertions()
+    {
+      base.CheckAssertions ();
+
+      CheckGameComponents ();
+      
+      Assert.IsNotNull (playerPrefsReader);
+      playerPrefsReader.CheckAssertions ();
+      Assert.IsNotNull (userDataReader);
+      userDataReader.CheckAssertions ();
+      Assert.IsNotNull (rosettaReader);
+      rosettaReader.CheckAssertions ();
+      Assert.IsNotNull (sceneLoader);
+      sceneLoader.CheckAssertions ();
+      Assert.IsNotNull (audioRegistry);
+      audioRegistry.CheckAssertions ();
+
+      Assert.IsFalse (patternRules.HasNull ());
+      for (int i = 0; i < patternRules.Count; i++)
+      {
+        patternRules [i].CheckAssertions ();
+      }
+
+      Assert.IsTrue (styles.Count > 0);
+      Assert.IsFalse (styles.HasNull ());
+      Assert.IsTrue (states.Count > 0);
+      Assert.IsFalse (states.HasNull ());
+
+      Assert.IsNotNull (obstacleWaitTime);
+      Assert.IsNotNull (playerHealth);
+      Assert.IsNotNull (togglePrefab);
+    }
+     
 // #endif
     
     void Awake ()
@@ -130,24 +185,8 @@ namespace Bee
       
       Logger.LogBegin ("Setup registry");
 
-      // check assertions
-      Assert.IsNotNull (playerPrefsReader);
-      playerPrefsReader.CheckAssertions ();
-      Assert.IsNotNull (userDataReader);
-      userDataReader.CheckAssertions ();
-      Assert.IsNotNull (rosettaReader);
-      rosettaReader.CheckAssertions ();
-
-      Assert.IsTrue (styles.Count > 0);
-      Assert.IsFalse (styles.HasNull ());
-      Assert.IsTrue (states.Count > 0);
-      Assert.IsFalse (states.HasNull ());
-
-      Assert.IsNotNull (obstacleWaitTime);
-      Assert.IsNotNull (togglePrefab);
-
-      // check game components in scene
-      CheckGameComponents ();
+      // check game components in scene + project
+      CheckAssertions ();
 
       // load user data
       userDataReader.LoadUserData ();
@@ -212,6 +251,20 @@ namespace Bee
     public void UnPause ()
     {
       paused = false;
+    }
+
+    public void IncreaseGlobalSpeed ()
+    {
+      globalSpeedMultiplier = 
+        Mathf.Clamp (
+          value: globalSpeedMultiplier + globalSpeedIncreaseStep, 
+          min: minSpeedMultiplier, 
+          max: maxSpeedMultiplier
+        );
+      Logger.Log (
+        $"Increase global speed: {globalSpeedMultiplier.ToString ().Important ()}",
+        this
+      );
     }
   }
 }

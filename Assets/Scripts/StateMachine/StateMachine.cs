@@ -192,9 +192,9 @@ namespace Bee
 
       yield return new WaitForSeconds (currentState.introTime);
 
-      GameGlobals.Instance.registry.SetWorldState (WorldState.Complete);
-
       currentState.Enter(listeners: listenerDict [currentState.state]);
+
+      GameGlobals.Instance.registry.SetWorldState (WorldState.Complete);
     }
 
     public AbstractState GetState (State state)
@@ -214,16 +214,35 @@ namespace Bee
         Logger.LogWarning ("State machine is not yet active!");
         return;
       }
-      paused = !paused;
 
       if (paused)
       {
-        currentState.Pause(listeners: listenerDict [currentState.state]);
+        UnPause ();
       }
       else
       {
-        currentState.UnPause(listeners: listenerDict [currentState.state]);   
+        Pause ();
       }
+    }
+
+    public void Pause ()
+    {
+      Logger.Log (
+        $"Pause state machine!",
+        this
+      );
+      paused = true;
+      currentState.Pause(listeners: listenerDict [currentState.state]);
+    }
+
+    public void UnPause ()
+    {
+      Logger.Log (
+        $"UnPause state machine!",
+        this
+      );
+      paused = false;
+      currentState.UnPause(listeners: listenerDict [currentState.state]);   
     }
 
 // #if UNITY_EDITOR

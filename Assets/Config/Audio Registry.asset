@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b67e397d94629f4cbab1c2a97301487, type: 3}
+  m_Name: Audio Registry
+  m_EditorClassIdentifier: 
+  me: {fileID: 11400000}
+  music_game: {fileID: 8300000, guid: 5cb6169ee849c054eb8f89641db62db5, type: 3}
+  music_mainmenu: {fileID: 8300000, guid: f6ac0e898ae58494a813bddbcbb8b343, type: 3}
+  music_bee: {fileID: 8300000, guid: 1e9e818a3a2648c4895e58a31aefc5cb, type: 3}
+  fx_coin: {fileID: 8300000, guid: acf2ff71800186440a8a3fb2e422e03f, type: 3}
+  fx_obstacle: {fileID: 8300000, guid: 17529c598c4c53b40976b1c1f73e87a7, type: 3}
+  fx_gameover: {fileID: 8300000, guid: 930d8a3f8a476de40b5f5e139bf1bf72, type: 3}
+  fx_flower: {fileID: 8300000, guid: eb5729a5e279e6e4c96d36027a3314e1, type: 3}
+  fx_select: {fileID: 8300000, guid: 737f4ed46f0c9cf448fe396435247cbe, type: 3}

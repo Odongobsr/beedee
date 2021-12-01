@@ -9,50 +9,20 @@ namespace Bee
   {
     public static int stepCount;
 
-    [Header ("References")]
-    public ObjectSpawner objectSpawner;
-
-    [Header ("Runtime only")]
-    public Stack<Block> inactiveFlowers = new Stack<Block> ();  
-    public Stack<Block> activeFlowers = new Stack<Block> ();  
-
-    public override void CheckAssertions()
+    public void PollinateFlower ()
     {
-      base.CheckAssertions();
-
-      Assert.IsNotNull (objectSpawner);
-    }
-
-    public override bool Activate ()
-    {
-      if (!base.Activate ()) return false;
-
-      // create flower object pool
-      objectSpawner.objectPool.CreateObjects (
-        // count: GameGlobals.Instance.registry.flowerPoolSize
+      // GameGlobals.Instance.audioManager.flowerSound.Play ();
+      GameGlobals.Instance.audioManager.PlayFX (
+        _clip: GameGlobals.Instance.registry.audioRegistry.fx_flower
       );
 
-      return true;
-    }
-    
-    public override void Start ()
-    {
-      base.Start ();
-      
-      GameGlobals.Instance.gameController.obstacleManager.objectSpawner.onSpawnObject += IncrementStepCount;
-    }
-
-    public override void OnDestroy()
-    {
-      base.OnDestroy();
-
-      GameGlobals.Instance.gameController.obstacleManager.objectSpawner.onSpawnObject -= IncrementStepCount;
-    }
-
-    void IncrementStepCount ()
-    {
-      stepCount++;
-      // Logger.Log ("Increase step count: " + stepCount);
+      GameGlobals.Instance.darkGroundSprite.ChangeAlpha (
+        _diff: GameGlobals.Instance.registry.groundLightenValue,
+        _time: GameGlobals.Instance.registry.groundLightenTime
+      );
+      GameGlobals.Instance.registry.playerHealth.value = 1.2f;
+      GameGlobals.Instance.registry.IncreaseGlobalSpeed ();
+      GameGlobals.Instance.gameController.flowersPollinated++;
     }
   }
 }

@@ -11,18 +11,7 @@ namespace Bee
 {
   public class GameGlobals : ScriptableObject
   {
-    public bool awake;
-    public Player player;
-    public Registry registry;
-    public GameController gameController;
-    public MainMenuController mainMenuController;
-    public StateMachine stateMachine;
-    public CoroutineRunner runner;
-    public GameIntroPrompt gameIntroPrompt;
-    public UIScreen playerButtonsUIScreen;
-    public SpriteRendererController darkGroundSprite;
-    public Transform transformHolder;
-
+    
     private static GameGlobals _instance;
     public static GameGlobals Instance
     {
@@ -63,6 +52,25 @@ namespace Bee
         }
       }
     }
+    
+    public bool awake;
+    public Player player;
+    public Registry registry;
+    public UIRaycaster UIRaycaster;
+    public GameController gameController;
+    public MainMenuController mainMenuController;
+    public StateMachine stateMachine;
+    public CoroutineRunner runner;
+    public GameIntroPrompt gameIntroPrompt;
+    public UIScreen fadeScreen;
+    public UIScreen gameOverScreen;
+    public UIScreen playerButtonsUIScreen;
+    public UIScreen statsScreen;
+    public UIScreen getReadyScreen;
+    public SpriteRendererController darkGroundSprite;
+    public Transform transformHolder;
+    public AudioManager audioManager;
+    public MainCamera mainCamera;
 
     public void Awake()
     {

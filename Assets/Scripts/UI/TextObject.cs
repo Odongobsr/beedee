@@ -41,10 +41,8 @@ namespace Bee
     }
 
     [ContextMenu ("Setup")]
-    public override bool Setup ()
+    public override void Setup ()
     {
-      base.Setup ();
-
       style = GameGlobals.Instance.registry.GetStyle (styleName);
 
       text.font = style.style.font;
@@ -62,8 +60,6 @@ namespace Bee
       //   $"Set {text.name} style to {style.styleName}",
       //   text
       // );
-
-      return true;
     }
 
     void OnChangeLanguage ()

@@ -53,33 +53,13 @@ public abstract class AbstractGameComponent : MonoBehaviour
 
   }
 
-  public virtual bool Activate ()
+  public virtual void Activate ()
   {
-    if (active)
-    {
-      Logger.LogWarning (
-        $"{name.Important ()} is already activated!",
-        this
-      );
-      return false;
-    }
-
     active = true;
-    return true;
   }
 
-  public virtual bool Deactivate ()
+  public virtual void Deactivate ()
   {
-    if (!active)
-    {
-      Logger.LogWarning (
-        $"{name.Important ()} is not activated!",
-        this
-      );
-      return false;
-    }
-
     active = false;
-    return true;
   }
 }

@@ -89,14 +89,8 @@ namespace Bee
     /// <summary>
     /// Equivalent to Unity's awake function
     /// </summary>
-    public virtual bool Setup ()
+    public virtual void Setup ()
     {
-      if (isSetup)
-      {
-        // Logger.Log ($"{name} is already setup", this);
-        return false;
-      }
-
       isSetup = true;
 
       // Logger.Log ($"Setup {name}", this);
@@ -105,8 +99,6 @@ namespace Bee
         listeners [a].SetActiveStates (activeStates);
         listeners [a].Setup ();
       }
-
-      return true;
     }
 
     // public virtual bool Initialise ()

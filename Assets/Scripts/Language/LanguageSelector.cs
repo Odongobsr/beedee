@@ -25,9 +25,9 @@ namespace Bee
       Assert.IsNotNull (chooseLanguageButton);
     }
 
-    public override bool Activate ()
+    public override void Activate ()
     {
-      if (!base.Activate ()) return false;
+      base.Activate ();
 
       Logger.Log (
         $"Activate language selector",
@@ -80,8 +80,6 @@ namespace Bee
 
       // activate language selector UI screen
       languageSelectScreen.Activate ();
-
-      return true;
     }
 
     /// <summary>

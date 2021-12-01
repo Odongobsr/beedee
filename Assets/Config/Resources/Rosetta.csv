@@ -1,13 +1,20 @@
 name,english,swahili
 choose_language,select language,chagua lugha
 continue_text,continue,endelea
+distance_flown,you flew,umbali umepepea
+did_you_know,did you know?,umewahi kujua?
 energy,energy,nguvu
 english,english,english
+fact_one,bees can fly up to 5 miles a day in search of food,nyuki anaweza pepea maili tano kwa siku ikitafuta chakula
+flowers_pollinated,flowers pollinated,maua umechavua
+game_over,GAME OVER,CHEZO KWISHA
 get_ready,get ready,kaa rada
-intro_frame_one,it is the year 2100| and earth is no longer what it used to be,ni mwaka wa 2100| na dunia haiko vile ilivyokuwa kitambo
+intro_frame_one,it is the year 2021| and the earth is no longer what it used to be,ni mwaka wa 2021| na dunia haiko vile ilivyokuwa kitambo
 intro_frame_two,years of excess industrialisation have turned it into a desolate landscape,miaka mengi ya ujenzi iliyozidi imefanya ardhi iwe kavu
-intro_frame_three,but this doesn't stop beedee and her tireless team of workers,lakini hii haitasimamisha beedee na wafanyikazi wenzake
-intro_frame_four,are you ready to help her save her colony and restore her home?,je| uko tayari kumsaidia kuokoa mzinga yake na kurejesha nyumbani yake? 
+intro_frame_three,but this doesn't stop Beedee and her tireless team of workers,lakini hii haitasimamisha Beedee na wafanyikazi wenzake
+intro_frame_four,are you ready to help Beedee save her colony and restore her home?,je| uko tayari kumsaidia Beedee kuokoa mzinga yake na kurejesha nyumbani yake? 
 score,score,alama
+meters,meters,mita
 swahili,swahili,swahili
 tap_to_start,tap to start,bonyeza hapa kuanza
+you_win,you win!,umeshinda!

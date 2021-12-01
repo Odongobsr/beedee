@@ -34,4 +34,33 @@ public static class TransformExtensionMethods
 
     return str;
   }
+
+  public static void SetXPosition (this Transform _trans, float _x)
+  {
+    _trans.position = new Vector3 (
+      x: _x,
+      y: _trans.position.y,
+      z: _trans.position.z
+    );
+  }
+  
+  public static void SetYPosition (this Transform _trans, float _y)
+  {
+    _trans.position = new Vector3 (
+      x: _trans.position.x,
+      y: _y,
+      z: _trans.position.z
+    );
+  }
+  
+  public static void SetXYPosition (this Transform _trans, Vector2 _pos)
+  {
+    _trans.position = new Vector3 (
+      x: _pos.x,
+      y: _pos.y,
+      z: _trans.position.z
+    );
+  }
+
+  
 }

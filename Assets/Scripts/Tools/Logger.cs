@@ -4,6 +4,12 @@ using System.Text;
 using UnityEngine;
 using Bee;
 
+public enum LoggerPriority
+{
+  Normal = 0,
+  Low = 1
+}
+
 public static class Logger
 {
   public static StringBuilder sb = new StringBuilder ();
@@ -59,7 +65,10 @@ public static class Logger
     sb.Append (_str);
 
     Log (_str: sb.ToString (), _context: _context, _color: "yellow");
+
+    LogDivider ();
   }
+  
   public static void LogList (string _title, string _message, Object _context = null, string _color = "")
   {
     StringBuilder sb = new StringBuilder ();

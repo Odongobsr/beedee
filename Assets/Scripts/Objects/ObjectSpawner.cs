@@ -46,7 +46,7 @@ namespace Bee
     }
 
     [ContextMenu ("Regenerate Pattern")]
-    void RegeneratePattern ()
+    public void RegeneratePattern ()
     {
       objectPattern = objectPatternGenerator.GeneratePattern ();
       patternIndex = 0;
@@ -64,10 +64,10 @@ namespace Bee
         return null;
       }
 
-      if (patternIndex >= objectPattern.objects.Count)
-      {
-        RegeneratePattern ();
-      }
+      // Logger.Log (
+      //   $"Object pattern: {objectPattern} Index: {patternIndex}",
+      //   objectPattern
+      // );
       
       AbstractPoolable obj = objectPool.GetInactiveObject (objectPattern.objects [patternIndex]);
 
@@ -91,9 +91,15 @@ namespace Bee
 
       // objects.Add (obj);
 
-      Logger.Log ($"Spawn object {obj.name}", obj);
+      // Logger.Log ($"Spawn object {obj.name}", obj);
 
       patternIndex++;
+
+      
+      if (patternIndex >= objectPattern.objects.Count)
+      {
+        RegeneratePattern ();
+      }
 
       return obj;
     }

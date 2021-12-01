@@ -16,11 +16,16 @@ MonoBehaviour:
   worldState: 2
   paused: 0
   debugMode: 0
-  hasShownIntroCutscene: 0
+  hasShownIntroCutscene: 1
+  score: 11
+  numberOfFlowers: 10
   introTime: 1
-  globalSpeedMultiplier: 2.25
+  minSpeedMultiplier: 2.25
+  maxSpeedMultiplier: 3
+  globalSpeedMultiplier: 2.45
+  globalSpeedIncreaseStep: 0.2
   playerMoveSpeed: 5
-  deathTimeout: 1.5
+  deathTimeout: 3
   spawnDistance: 2
   cutsceneFrameTime: 7
   defaultFadeTime: 0
@@ -30,20 +35,24 @@ MonoBehaviour:
   playerPrefsReader: {fileID: 11400000, guid: c9cf1a7e6b140be4db69b6853baafa42, type: 2}
   userDataReader: {fileID: 11400000, guid: b5ccb6d137e8e8b45a681141b559e97c, type: 2}
   rosettaReader: {fileID: 11400000, guid: 2db4cc1fde8b6eb47bc8c6493d9ac5fe, type: 2}
+  sceneLoader: {fileID: 11400000, guid: 9dcad4374fed7fd40ac6855266b555a5, type: 2}
+  audioRegistry: {fileID: 11400000, guid: 7c7ca6ba0c115f04d821075905a522ed, type: 2}
   states:
   - {fileID: 11400000, guid: 8222bca8b29bee14e992c29df6067445, type: 2}
   - {fileID: 11400000, guid: aeb60b42714117445a7cae281c1197c3, type: 2}
   useTouchInput: 0
   obstacleWaitTime: {fileID: 11400000, guid: 037aa910cf83e4447a3ef81d93a5ff14, type: 2}
   flowerWaitTime: {fileID: 11400000, guid: df3f40fa0ddb3b74c86d7365ce9dd1d0, type: 2}
+  playerHealth: {fileID: 11400000, guid: 380936b9594961a4e80624d338f886f5, type: 2}
+  playerHealthTime: 20
   obstaclePoolSize: 5
   doubleObstacleGapMin: 1
   doubleObstacleGapMax: 2
   doubleObstacleXOffset: 1
   flowerInterval: 10
   flowerPoolSize: 5
-  blocks: []
-  levels: []
+  patternRules:
+  - {fileID: 11400000, guid: 94af76b6861cc3d4b847504661d7dba0, type: 2}
   obstacleTag: Obstacle
   coinTag: Coin
   flowerTag: Flower

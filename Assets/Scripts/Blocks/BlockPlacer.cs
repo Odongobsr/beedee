@@ -8,23 +8,30 @@ namespace Bee
   {
     public BlockData data;
     public Block block;
+    public Transform holder;
 
-    public override bool Enter ()
+    public override void OnEnable()
     {
-      if (!base.Enter ()) return false;
+      if ( GameGlobals.Instance.registry.worldState != WorldState.Complete)
+      {
+        return;
+      }
+
+      if (null == holder)
+      {
+        holder = transform;
+      }
 
       AbstractPoolable obj = GameGlobals.Instance.gameController.obstacleManager.objectSpawner.objectPool.GetInactiveObject ( data );
 
-      Logger.Log (
-        $"Place object {obj}",
-        obj
-      );
+      // Logger.Log (
+      //   $"Place object {obj}",
+      //   obj
+      // );
 
       block = obj.GetComponent<Block>();
-      block.transform.position = transform.position;
+      block.transform.position = holder.position;
       obj.gameObject.SetActive (true);
-
-      return true;
     }
   }
 }

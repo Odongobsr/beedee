@@ -18,9 +18,13 @@ namespace Bee
         Assert.IsNotNull (scoreText);
       }
 
-      public override void OnEnable ()
+      public override void Start ()
       {
+        base.Start ();
+        
         lastScore = -1;
+        string str = GameGlobals.Instance.registry.rosettaReader.GetKey (RosettaKey.score);
+        scoreText.text = $"{str}: 0";
       }
 
       public override void MyLateUpdate ()
